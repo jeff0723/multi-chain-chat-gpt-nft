@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { AzukiAddress } from "../utils/constants";
 dotenv.config();
 
 // after the client calls getBlockHeader, and you now have the block header
@@ -14,9 +15,11 @@ async function getProofs(blockhash) {
     false,
   ]);
 
+  // !!! get the correct slot for the NFT
+
   const proof = await provider.send("eth_getProof", [
-    ghoulsAddress,
-    [slot],
+    AzukiAddress,
+    [slot], // !!! define the slot
     blockNumber,
   ]);
 
@@ -24,5 +27,5 @@ async function getProofs(blockhash) {
 
   const storageRoot = blockInfo["result"]["stateRoot"];
 
-  await claimAzuki();
+  await claimAzuki(); // !!! put inputs here
 }
