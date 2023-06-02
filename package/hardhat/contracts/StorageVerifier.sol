@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-
-import "forge-std/console.sol";
+//import hardhat console.sol hardhat/console.sol
 import {MPT} from "./MPT.sol";
 
 abstract contract StorageVerifier {
