@@ -8,7 +8,7 @@ contract ChatGPTNFT is ERC721 {
     using Strings for uint256;
     string private _baseTokenURI;
     address public originalContractAddress;
-    mapping(uint256 => string) public agentURI;
+    mapping(uint256 => string) public agentURI; //id -> string
 
     constructor(
         address _originalAddress,
@@ -18,9 +18,24 @@ contract ChatGPTNFT is ERC721 {
         originalContractAddress = _originalAddress;
     }
 
+    function isOriginalOwner() public returns (bool) {
+        return true;
+    }
+
     function mint(address _to, uint256 _tokenId) public {
         //add verify function here
+        require(isOriginalOwner(), "Not original owner");
         _safeMint(_to, _tokenId);
+    }
+
+    function setAgentURI(uint256 _tokenId, string memory _uri) public {
+        require(isOriginalOwner(), "Not original owner");
+        agentURI[_tokenId] = _uri;
+    }
+
+    function getAgentURI(uint256 _tokenId) public view returns (string memory) {
+        // add require owner here
+        return agentURI[_tokenId];
     }
 
     function tokenURI(
