@@ -30,6 +30,7 @@ async function claimNFT(nft, blockhash) {
   await claimAzuki(
     nft.tokenId,
     nft.imageUrl,
+    blockheader,
     signature,
     proof.storageHash,
     proof.accountProof,
