@@ -2,7 +2,6 @@
 pragma solidity >=0.8.0;
 
 import {RLPReader} from "./RLPReader.sol";
-import "forge-std/console.sol";
 
 library MPT {
     using RLPReader for bytes;
