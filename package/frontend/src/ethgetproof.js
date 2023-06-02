@@ -5,7 +5,7 @@ dotenv.config();
 // after the client calls getBlockHeader, and you now have the block header
 // use this function to get the relevant account and storage proofs
 // nft is a struct that containsthe tokenId and the imageURL
-async function getProofs(nft, blockhash) {
+async function claimNFT(nft, blockhash) {
   const signature = window.localStorage.getItem("signature");
   const RPC = "https://mainnet.infura.io/v3/dc7c60b22021400a97355601e710833d";
   const provider = new ethers.providers.JsonRpcProvider(RPC);
