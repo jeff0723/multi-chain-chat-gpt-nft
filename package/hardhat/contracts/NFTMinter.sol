@@ -11,6 +11,8 @@
 //     using ECDSA for bytes32;
 //     using ECDSA for bytes;
 
+        bytes32 blockheader;
+
 //     IHashi public hashiInterface;
 
 //     // use hashi to get the current stateroot and return the blockNumber
@@ -23,7 +25,8 @@
 //         Hashi.getHash(uint256 domain,
 //         uint256 id,
 //         IOracleAdapter[] memory oracleAdapters)
-//     }
+//     } { blockheader = blockheader;}
+}
 
 //     function claimGhoul(
 //         uint256 tokenId,
