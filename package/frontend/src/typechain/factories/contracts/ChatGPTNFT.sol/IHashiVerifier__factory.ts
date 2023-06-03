@@ -29,11 +29,6 @@ const _abi = [
       },
       {
         internalType: "bytes32",
-        name: "stateRoot",
-        type: "bytes32",
-      },
-      {
-        internalType: "bytes32",
         name: "storageRoot",
         type: "bytes32",
       },

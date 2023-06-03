@@ -24,7 +24,7 @@ import type {
 
 export interface IHashiVerifierInterface extends utils.Interface {
   functions: {
-    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes32,bytes[],bytes[])": FunctionFragment;
+    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "verifyOwner"): FunctionFragment;
@@ -34,7 +34,6 @@ export interface IHashiVerifierInterface extends utils.Interface {
     values: [
       BytesLike,
       BigNumberish,
-      BytesLike,
       BytesLike,
       BytesLike,
       BytesLike[],
@@ -81,7 +80,6 @@ export interface IHashiVerifier extends BaseContract {
       hashiheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -93,7 +91,6 @@ export interface IHashiVerifier extends BaseContract {
     hashiheader: BytesLike,
     tokenId: BigNumberish,
     signature: BytesLike,
-    stateRoot: BytesLike,
     storageRoot: BytesLike,
     stateProof: BytesLike[],
     storageProof: BytesLike[],
@@ -105,7 +102,6 @@ export interface IHashiVerifier extends BaseContract {
       hashiheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -120,7 +116,6 @@ export interface IHashiVerifier extends BaseContract {
       hashiheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -133,7 +128,6 @@ export interface IHashiVerifier extends BaseContract {
       hashiheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],

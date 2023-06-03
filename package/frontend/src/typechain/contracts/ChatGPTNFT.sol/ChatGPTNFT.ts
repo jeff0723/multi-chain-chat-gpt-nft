@@ -35,7 +35,7 @@ export interface ChatGPTNFTInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "hashiVerifier()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(address,uint256,bytes32,bytes,bytes32,bytes32,bytes[],bytes[])": FunctionFragment;
+    "mint(address,uint256,bytes32,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
     "name()": FunctionFragment;
     "originalContractAddress()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -102,7 +102,6 @@ export interface ChatGPTNFTInterface extends utils.Interface {
     values: [
       string,
       BigNumberish,
-      BytesLike,
       BytesLike,
       BytesLike,
       BytesLike,
@@ -309,7 +308,6 @@ export interface ChatGPTNFT extends BaseContract {
       tokenId: BigNumberish,
       blockheader: BytesLike,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -405,7 +403,6 @@ export interface ChatGPTNFT extends BaseContract {
     tokenId: BigNumberish,
     blockheader: BytesLike,
     signature: BytesLike,
-    stateRoot: BytesLike,
     storageRoot: BytesLike,
     stateProof: BytesLike[],
     storageProof: BytesLike[],
@@ -495,7 +492,6 @@ export interface ChatGPTNFT extends BaseContract {
       tokenId: BigNumberish,
       blockheader: BytesLike,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -621,7 +617,6 @@ export interface ChatGPTNFT extends BaseContract {
       tokenId: BigNumberish,
       blockheader: BytesLike,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -724,7 +719,6 @@ export interface ChatGPTNFT extends BaseContract {
       tokenId: BigNumberish,
       blockheader: BytesLike,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
