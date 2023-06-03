@@ -3,6 +3,8 @@
 import { ethers } from "ethers";
 import dotenv from "dotenv";
 import {
+  OWNERADDRESS,
+  CHATGPTNFT_ADDRESS,
   HASHI_VERIFIER_ABI,
   HASHI_VERIFIER_ADDRESS,
   ghoulsSlotOf,
@@ -11,8 +13,6 @@ import {
   CHATGPTNFT_ABI,
 } from "./constant.js";
 dotenv.config({ path: "../.env" });
-
-const CHATGPTNFT_ADDRESS = "0x83fe1B2DF040De3FC019545CCf54751e97e15792";
 
 const mainnetRPC =
   "https://mainnet.infura.io/v3/dc7c60b22021400a97355601e710833d";
@@ -28,7 +28,7 @@ console.log(ethers.utils.formatEther(await gnosisSigner.getBalance()));
 async function getSignature() {
   const message = ethers.utils.defaultAbiCoder.encode(
     ["address"],
-    ["0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7"]
+    [OWNERADDRESS]
   );
   const signature = await mainnetSigner?.signMessage(
     ethers.utils.arrayify(message)
@@ -39,29 +39,43 @@ async function getSignature() {
 async function testContract() {
   const signature = await getSignature();
 
-  // await mainnetProvider.send("eth_blockNumber");
-  const blockHash = await mainnetProvider.send("eth_getBlockByNumber", [
-    CURRENTBLOCKHEIGHT,
-    false,
-  ]);
-
-  const slot = ghoulsSlotOf(GHOULTOKENID);
-  const proof = await mainnetProvider.send("eth_getProof", [
-    // hardcode pudgy address
-    "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90",
-    [slot],
-    CURRENTBLOCKHEIGHT,
-  ]);
-
-  // If hashi is initialized - set this to most recent block
-  const blockheader =
-    "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
-
   const hashiVerifier = new ethers.Contract(
     HASHI_VERIFIER_ADDRESS,
     HASHI_VERIFIER_ABI,
     gnosisSigner
   );
+
+  const slot = ghoulsSlotOf(GHOULTOKENID);
+
+  let proof;
+  let blockheader;
+
+  if (process.env.HASHI == "true") {
+    console.log("Hashi Initialized... Using Hashi Header");
+    blockheader = await hashiVerifier.getBlockHeader();
+    const block = await mainnetProvider.send("eth_getBlockByHash", [
+      blockheader,
+      false,
+    ]);
+
+    proof = await mainnetProvider.send("eth_getProof", [
+      // hardcode pudgy address
+      "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90",
+      [slot],
+      block.number,
+    ]);
+  } else {
+    console.log("Hashi Not Initialized... Using Hard-coded Header");
+    blockheader =
+      "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
+
+    proof = await mainnetProvider.send("eth_getProof", [
+      // hardcode Ghouls address
+      "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90",
+      [slot],
+      CURRENTBLOCKHEIGHT,
+    ]);
+  }
 
   // console.log(proof.accountProof, proof.storageProof[0], stateRoot, proof);
 
@@ -69,7 +83,7 @@ async function testContract() {
     const verifyOwnertx = await hashiVerifier.verifyOwner(
       blockheader,
       GHOULTOKENID,
-      "0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7",
+      OWNERADDRESS,
       signature,
       proof.storageHash,
       proof.accountProof,
@@ -92,7 +106,7 @@ async function testContract() {
   );
 
   const mint = await chatgpt_nft.mint(
-    "0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7",
+    OWNERADDRESS,
     GHOULTOKENID,
     blockheader,
     signature,
