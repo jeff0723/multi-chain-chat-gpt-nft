@@ -1,3 +1,5 @@
+## Description  
+
 Multichain-GPT-NFT is
 
 1. A "lightclient"
@@ -20,7 +22,30 @@ Made by
 1. Jeffrey - Full stack developer, @jeff0723 on TG
 2. taetaehoho - Full stack developer, @taetaehoho on TG
 
-Sponsors
+
+## Installation
+
+Project installation:
+
+```
+git clone https://github.com/taetaehoho/mc-gpt-nft.git
+
+cd package/hardhat
+
+yarn 
+
+yarn hardhat deploy --network [gnosis | auroratestnet ]
+
+cd test 
+
+node verifyandmint.js
+```
+
+## Acknowledgments
+
+Special thanks to the ETHSeoul, its sponsors, and @cometh team. 
+
+## Sponsors
 
 Near
 
