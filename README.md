@@ -1,5 +1,7 @@
 Multichain-GPT-NFT is
 
+![hashi](https://github.com/taetaehoho/mc-gpt-nft/assets/75167060/6758bd40-d7d2-4f8d-bbcc-1ef8c027d0e2)
+
 1. A "lightclient"
    a. smart contract that stores blockheaders from unanimously agreed Hashi oracle blockheaders
    b. a frontend that queries RPCs for proofs for a storage slot related to your ownership of a specific NFT (Pudgy Penguins in this case) and generates merkle proofs to verify that you hold this NFT
