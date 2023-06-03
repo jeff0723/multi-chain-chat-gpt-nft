@@ -45,11 +45,11 @@ node verifyandmint.js
 
 ## Acknowledgments
 
-Special thanks to the ETHSeoul, its sponsors, and @cometh team. 
+Special thanks to the ETHSeoul, its sponsors, and @cometh team for their MPT verifier implementation 🙏 
 
 ## Sponsors
 
-Near
+Near 
 
 - Target audience - people who want to mint AI augmented NFTs on other chains due to cheaper transaction costs and higher throughput but want to use proven ownership of their favorite NFTs from Ethereum
 - Technical Implementation - Nodejs, Solidity, hardhat backend, NextJS, React, WAGMI for the frontend. The project is deployed on Aurora Testnet @0xb4A922624a576068dE57Ea787403128d565D8042 for HashiVerifier and @ for ChatGPTNFT so that users can interact with their NFT and mint many different versions/collections without concern for gas costs.
