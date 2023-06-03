@@ -5,7 +5,7 @@ export const CURRENTBLOCKHEIGHT = "0x109817c";
 export const GHOULTOKENID = 1340;
 
 export const HASHI_VERIFIER_ADDRESS =
-  "0xd7eFBF9B92C98A189f216995FEAb45c537BD7E25";
+  "0xFA9D27a19D9C2ADd9237AEA20623BA23A6Dd6338";
 
 export const ghoulsSlotOf = (tokenId) =>
   ethers.utils.keccak256(
