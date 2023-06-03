@@ -1,5 +1,9 @@
 import ethers from "ethers";
 
+export const CURRENTBLOCKHEIGHT = "0x109817c";
+
+export const GHOULTOKENID = 1340;
+
 export const HASHI_VERIFIER_ABI = [
   {
     inputs: [

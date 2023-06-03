@@ -6,6 +6,7 @@ import {
   HASHI_VERIFIER_ABI,
   HASHI_VERIFIER_ADDRESS,
   ghoulsSlotOf,
+  CURRENTBLOCKHEIGHT,
 } from "./constant.js";
 import fs from "fs";
 import { stderr } from "process";
@@ -22,3 +23,10 @@ const gnosisSigner = new ethers.Wallet(process.env.PK, gnosisProvider);
 
 const blockNumber = await mainnetProvider.send("eth_blockNumber");
 console.log(blockNumber);
+
+const block = await mainnetProvider.send("eth_getBlockByNumber", [
+  CURRENTBLOCKHEIGHT,
+  false,
+]);
+
+console.log(block);
