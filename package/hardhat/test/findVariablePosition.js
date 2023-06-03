@@ -2,8 +2,11 @@
 //@ts-check
 import { ethers } from "ethers";
 import dotenv from "dotenv";
-import { HASHI_VERIFIER_ABI, HASHI_VERIFIER_ADDRESS } from "./constant.js";
-import fs from "fs";
+import {
+  HASHI_VERIFIER_ABI,
+  HASHI_VERIFIER_ADDRESS,
+  ghoulsSlotOf,
+} from "./constant.js";
 dotenv.config({ path: "../.env" });
 
 const mainnetRPC =
@@ -11,17 +14,11 @@ const mainnetRPC =
 const mainnetProvider = new ethers.providers.JsonRpcProvider(mainnetRPC);
 const mainnetSigner = new ethers.Wallet(process.env.PK, mainnetProvider);
 
-const gnosisRPC = "https://gnosischain-rpc.gateway.pokt.network/";
+const gnosisRPC = "https://rpc.ankr.com/gnosis";
 const gnosisProvider = new ethers.providers.JsonRpcProvider(gnosisRPC);
 const gnosisSigner = new ethers.Wallet(process.env.PK, gnosisProvider);
 
-const PudgySlot = (tokenId, variable_position) =>
-  ethers.utils.keccak256(
-    ethers.utils.solidityPack(
-      ["uint256", "uint256"],
-      [tokenId, variable_position]
-    )
-  );
+console.log(ethers.utils.formatEther(await gnosisSigner.getBalance()));
 
 async function getSignature() {
   const message = ethers.utils.defaultAbiCoder.encode(
@@ -37,7 +34,7 @@ async function getSignature() {
 async function testContract(tokenId) {
   const signature = await getSignature();
 
-  const blockNumber = "0x1097bfb";
+  const blockNumber = "0x109808d";
 
   // await mainnetProvider.send("eth_blockNumber");
   const blockHash = await mainnetProvider.send("eth_getBlockByNumber", [
@@ -47,61 +44,46 @@ async function testContract(tokenId) {
 
   const stateRoot = blockHash["stateRoot"];
 
-  for (let i = 0; i < 1; i++) {
-    const slot = PudgySlot(tokenId, i);
-    const proof = await mainnetProvider.send("eth_getProof", [
-      // hardcode pudgy address
-      "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8",
-      [slot], // !!! define the slot
-      blockNumber,
-    ]);
+  const slot = ghoulsSlotOf(tokenId);
+  const proof = await mainnetProvider.send("eth_getProof", [
+    // hardcode pudgy address
+    "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90",
+    [slot],
+    blockNumber,
+  ]);
 
-    const jsonData = JSON.stringify(proof);
+  const blockheader =
+    "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
 
-    // // Write the JSON data to a file
-    // fs.writeFile(`data/${i}.json`, jsonData, "utf8", (err) => {
-    //   if (err) {
-    //     console.error("Error writing JSON file:", err);
-    //   } else {
-    //     console.log("JSON file has been written successfully.");
-    //   }
-    // });
+  console.log(1);
 
-    const blockheader =
-      "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
-    // console.log(signature);
-    // console.log(proof);
-    const hashiVerifier = new ethers.Contract(
-      HASHI_VERIFIER_ADDRESS,
-      HASHI_VERIFIER_ABI,
-      gnosisSigner
+  const hashiVerifier = new ethers.Contract(
+    HASHI_VERIFIER_ADDRESS,
+    HASHI_VERIFIER_ABI,
+    gnosisSigner
+  );
+  // console.log(hashiVerifier);
+
+  console.log(2);
+  // console.log(proof.accountProof, proof.storageProof[0], stateRoot, proof);
+
+  try {
+    const verifyOwnertx = await hashiVerifier.verifyOwner(
+      blockheader,
+      tokenId,
+      signature,
+      stateRoot,
+      proof.accountProof,
+      proof.storageProof[0].proof,
+      {
+        gasLimit: 2e7,
+        gasPrice: 30000000000,
+      }
     );
-    // console.log(hashiVerifier);
-    console.log("blockheader: ", blockheader);
-    console.log("token id: ", tokenId);
-    console.log("signature: ", signature);
-    console.log("stateRoot: ", stateRoot);
-    console.log("storageHash: ", proof.storageHash);
-    console.log("accountProof: ", proof.accountProof);
-    console.log("storageProof: ", proof.storageProof[0].proof);
-    // try {
-    //   const verifyOwnertx = await hashiVerifier.verifyOwner(
-    //     blockheader,
-    //     tokenId,
-    //     signature,
-    //     stateRoot,
-    //     proof.storageHash,
-    //     proof.accountProof,
-    //     proof.storageProof[0].proof,
-    //     { gasLimit: 30000000 }
-    //   );
-    //   console.log("index: ", i);
-    //   console.log("slot: ", slot);
-    // } catch (err) {
-    //   console.log("Error: ", err.message);
-    //   console.log("index: ", i);
-    // }
+    console.log(verifyOwnertx);
+  } catch (err) {
+    console.log("Error: ", err.message);
   }
 }
 
-testContract(816);
+testContract(824);

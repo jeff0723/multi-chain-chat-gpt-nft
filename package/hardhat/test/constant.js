@@ -1,3 +1,5 @@
+import ethers from "ethers";
+
 export const HASHI_VERIFIER_ABI = [
   {
     inputs: [
@@ -24,11 +26,6 @@ export const HASHI_VERIFIER_ABI = [
   {
     inputs: [],
     name: "InvalidAccount",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidHashiHash",
     type: "error",
   },
   {
@@ -101,11 +98,6 @@ export const HASHI_VERIFIER_ABI = [
         type: "bytes32",
       },
       {
-        internalType: "bytes32",
-        name: "storageRoot",
-        type: "bytes32",
-      },
-      {
         internalType: "bytes[]",
         name: "stateProof",
         type: "bytes[]",
@@ -124,4 +116,11 @@ export const HASHI_VERIFIER_ABI = [
 ];
 
 export const HASHI_VERIFIER_ADDRESS =
-  "0x980D3730fA360eE50ffCcc997F150c5061E1BcB9";
+  "0x15AB4Bc65D5293ad5d81cc572ed0716ede3D6692";
+
+export const ghoulsSlotOf = (tokenId) =>
+  ethers.utils.keccak256(
+    ethers.utils.solidityPack(["uint256", "uint256"], [tokenId, 103])
+  );
+
+export const ghoulsAddress = "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90";
