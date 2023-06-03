@@ -113,12 +113,16 @@ function Sidebar({ }: Props) {
                     <div className='mt-5 mb-5 border-t bg-gray-300 opacity-20'></div>
                     <div className='flex flex-col gap-5 px-4'>
                         <div className='flex'>
-                            {currentAgent &&
+                            {currentAgent ?
                                 <div className='flex flex-col gap-5 text-sm'>
                                     <img src='images/1.png' width={150} height={150} className='rounded-lg' />
                                     <div>{currentAgent.name}</div>
                                 </div>
+                                : (<div className='flex flex-col gap-5 text-sm'>
+                                    {"You current don't have any NFT agent"}
+                                </div>)
                             }
+
 
                         </div>
                     </div>
