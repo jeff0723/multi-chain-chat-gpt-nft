@@ -63,3 +63,4 @@ Gnosis
 - Deployed on Gnosis!
 - Setup instructions run
    `yarn hardhat deploy --network gnosis` to deploy relevant contracts and automatically verify on Gnosiscan. Interact with test/verifyandmint.js or on Gnosisscan!
+- For our Proof of Concept we made our Based Ghoul a HASHI EXPERT!!! 🌉
