@@ -2,14 +2,7 @@
 //@ts-check
 import { ethers } from "ethers";
 import dotenv from "dotenv";
-import {
-  HASHI_VERIFIER_ABI,
-  HASHI_VERIFIER_ADDRESS,
-  ghoulsSlotOf,
-  CURRENTBLOCKHEIGHT,
-} from "./constant.js";
-import fs from "fs";
-import { stderr } from "process";
+import { CURRENTBLOCKHEIGHT } from "./constant.js";
 dotenv.config({ path: "../.env" });
 
 const mainnetRPC =
