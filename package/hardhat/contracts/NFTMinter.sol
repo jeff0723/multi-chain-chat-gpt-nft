@@ -6,7 +6,7 @@ import {StorageVerifier} from "./StorageVerifier.sol";
 import {IHashi} from "./interfaces/IHashi.sol";
 import {ECDSA} from "./@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-contract claimPenguin is StorageVerifier {
+contract HashiVerifier is StorageVerifier {
     using ECDSA for bytes32;
     using ECDSA for bytes;
 
