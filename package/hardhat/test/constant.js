@@ -5,7 +5,7 @@ export const CURRENTBLOCKHEIGHT = "0x109817c";
 export const GHOULTOKENID = 1340;
 
 export const HASHI_VERIFIER_ADDRESS =
-  "0xFA9D27a19D9C2ADd9237AEA20623BA23A6Dd6338";
+  "0xb8656Ab752AD59Df7F07012cF47369293465Eed6";
 
 export const ghoulsSlotOf = (tokenId) =>
   ethers.utils.keccak256(
@@ -102,13 +102,18 @@ export const HASHI_VERIFIER_ABI = [
         type: "uint256",
       },
       {
+        internalType: "address",
+        name: "messageSender",
+        type: "address",
+      },
+      {
         internalType: "bytes",
         name: "signature",
         type: "bytes",
       },
       {
         internalType: "bytes32",
-        name: "stateRoot",
+        name: "storageRoot",
         type: "bytes32",
       },
       {
