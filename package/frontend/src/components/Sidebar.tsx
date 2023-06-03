@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react';
 import { IoMdSettings, IoMdClose } from 'react-icons/io'
 import Modal from './Modal';
 import { IconType } from 'react-icons';
+import { useAppSelector } from '@/state/hook';
 
 enum Tab {
     Mint,
@@ -57,6 +58,7 @@ const SettingsContainer = styled.div`
     padding: 12px;
 `
 function Sidebar({ }: Props) {
+    const currentAgent = useAppSelector(state => state.application.currentAgent)
     const { pathname } = useRouter()
     const [selectedTab, setSelectedTab] = useState<Tab>(currentTab(pathname))
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false)
@@ -111,10 +113,13 @@ function Sidebar({ }: Props) {
                     <div className='mt-5 mb-5 border-t bg-gray-300 opacity-20'></div>
                     <div className='flex flex-col gap-5 px-4'>
                         <div className='flex'>
-                            <div className='flex flex-col gap-5 text-sm'>
-                                <img src='images/1.png' width={150} height={150} className='rounded-lg' />
-                                <div> Hashi Bridge Master</div>
-                            </div>
+                            {currentAgent &&
+                                <div className='flex flex-col gap-5 text-sm'>
+                                    <img src='images/1.png' width={150} height={150} className='rounded-lg' />
+                                    <div>{currentAgent.name}</div>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>

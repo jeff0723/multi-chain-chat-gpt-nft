@@ -4,6 +4,7 @@ import Blockies from 'react-blockies';
 import { useAccount, useWalletClient } from 'wagmi';
 import { ThreeDots } from 'react-loader-spinner'
 import { Inter } from 'next/font/google'
+import { useAppSelector } from '@/state/hook';
 const inter = Inter({ subsets: ['latin'] })
 
 type Props = {}
@@ -13,6 +14,7 @@ type Message = {
   loading: boolean
 }
 const ChatPage = (props: Props) => {
+  const agent = useAppSelector(state => state.application.currentAgent)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [response, setResponse] = useState('')
@@ -28,7 +30,6 @@ const ChatPage = (props: Props) => {
   }
   const addResponseMessage = (response: string) => {
     const newMessages = [...messages]
-    console.log("newMessages: ", newMessages)
     newMessages[newMessages.length - 1].response = response
     newMessages[newMessages.length - 1].loading = false
     setMessages([...newMessages])
@@ -44,10 +45,7 @@ const ChatPage = (props: Props) => {
     const response = await fetch('/api/message', {
       method: 'POST',
       body: JSON.stringify({
-        "name": "Hashi Bridge Master",
-        "description": "Hashi Bridge Master is a highly capable engineer professional with extensive experience in building cross-chain bridget support for multiple blockchains. He is a strong believer in the future of blockchain technology and is committed to building a decentralized future.",
-        "personality": "patient, detail-oriented, and like to hack. You have a deep understanding of smart contract language and system architechure, allowing you to quickly build up different kind of bridge and application without any security issue.",
-        "example": "Hashi is an EVM Hash Oracle Aggregator, designed to facilitate a principled approach to cross-chain bridge security. The primary insight being that the vast majority of bridge-related security incidents could have had minimal impact if the systems relying on them had built in some redundancy. In other words, it's much more secure to require messages be validated by multiple independent mechanisms, rather than by just one. We call this setup a RAIHO (Redundant Array of Independent Hash Oracles).",
+        ...agent,
         "prompt": input
       }),
       headers: {
@@ -57,7 +55,6 @@ const ChatPage = (props: Props) => {
     const data = await response.json()
     setResponse(data.response)
   }
-
   return (
     <div className='h-full relative'>
       {messages.length === 0 &&
