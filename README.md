@@ -43,7 +43,7 @@ yarn hardhat deploy --network [gnosis | auroratestnet ]
 
 cd test
 
-node verifyandmint.js
+node verifyandmint.js --network [gnosis | auroratestnet ]
 ```
 
 ### Start frontend

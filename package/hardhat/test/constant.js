@@ -1,24 +1,23 @@
-import ethers from "ethers";
+const { ethers } = require("ethers");
+const CURRENTBLOCKHEIGHT = "0x109817c";
 
-export const CURRENTBLOCKHEIGHT = "0x109817c";
+const GHOULTOKENID = 1340;
 
-export const GHOULTOKENID = 1340;
+const OWNERADDRESS = "0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7";
 
-export const OWNERADDRESS = "0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7";
-
-export const HASHI_VERIFIER_ADDRESS =
+const HASHI_VERIFIER_ADDRESS =
   "0xF8A571a1E93405B0F143A81E807785EA4aB60826";
 
-export const CHATGPTNFT_ADDRESS = "0xbFf551Ee143E508540A120a31EcBa29091920ABB";
+const CHATGPTNFT_ADDRESS = "0xbFf551Ee143E508540A120a31EcBa29091920ABB";
 
-export const ghoulsSlotOf = (tokenId) =>
+const ghoulsSlotOf = (tokenId) =>
   ethers.utils.keccak256(
     ethers.utils.solidityPack(["uint256", "uint256"], [tokenId, 103])
   );
 
-export const ghoulsAddress = "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90";
+const ghoulsAddress = "0xeF1a89cbfAbE59397FfdA11Fc5DF293E9bC5Db90";
 
-export const HASHI_VERIFIER_ABI = [
+const HASHI_VERIFIER_ABI = [
   {
     inputs: [
       {
@@ -138,7 +137,7 @@ export const HASHI_VERIFIER_ABI = [
   },
 ];
 
-export const CHATGPTNFT_ABI = [
+const CHATGPTNFT_ABI = [
   {
     inputs: [
       {
@@ -616,3 +615,14 @@ export const CHATGPTNFT_ABI = [
     type: "function",
   },
 ];
+module.exports = {
+  CURRENTBLOCKHEIGHT,
+  GHOULTOKENID,
+  OWNERADDRESS,
+  HASHI_VERIFIER_ADDRESS,
+  CHATGPTNFT_ADDRESS,
+  ghoulsSlotOf,
+  ghoulsAddress,
+  HASHI_VERIFIER_ABI,
+  CHATGPTNFT_ABI
+}
