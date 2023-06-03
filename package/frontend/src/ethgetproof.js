@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { PudgyAddress, PudgySlot } from "../utils/constants";
+import { PudgyAddress, PudgySlot } from "../../utils/constants";
 dotenv.config();
 async function getSignature(signer, address) {
   const message = ethers.utils.defaultAbiCoder.encode(["address"], [address]);

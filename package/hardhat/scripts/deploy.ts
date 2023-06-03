@@ -1,7 +1,7 @@
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {DeployFunction} from 'hardhat-deploy/types';
 import {parseEther} from 'ethers/lib/utils';
-import {hashiAddressGnosis} from '../utils/constants.ts';
+import {hashiAddressGnosis, PudgyAddress} from "../../utils/constants.js";	
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 	const {deployments, getNamedAccounts} = hre;
@@ -9,12 +9,19 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
 	const {deployer} = await getNamedAccounts();
 
-	await deploy('HashiVerifier', {
+	const hashverifier = await deploy('HashiVerifier', {
 		from: deployer,
 		args: [hashiAddressGnosis],
 		log: true,
 		autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
 	});
+
+	const deploymentaddress = hashverifier
+
+	const constructorargsNFT = [PudgyAddress, ]
+
+	string memory _originalBaseURI,
+	address _hashiVerifier
 
   await deploy('ChatGPTNFT', {
     from: deployer,
