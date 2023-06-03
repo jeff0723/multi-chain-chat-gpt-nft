@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { AzukiAddress } from "../utils/constants";
 import { ethers } from "ethers";
 dotenv.config();
-async function getSigner(signer, address) {
+async function getSignature(signer, address) {
   const message = ethers.utils.defaultAbiCoder.encode(
     ["address"],
     [address]
