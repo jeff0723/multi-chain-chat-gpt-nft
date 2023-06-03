@@ -47,7 +47,7 @@ async function testContract(tokenId) {
 
   const stateRoot = blockHash["stateRoot"];
 
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0; i < 1; i++) {
     const slot = PudgySlot(tokenId, i);
     const proof = await mainnetProvider.send("eth_getProof", [
       // hardcode pudgy address
@@ -58,32 +58,32 @@ async function testContract(tokenId) {
 
     const jsonData = JSON.stringify(proof);
 
-    // Write the JSON data to a file
-    fs.writeFile(`data/${i}.json`, jsonData, "utf8", (err) => {
-      if (err) {
-        console.error("Error writing JSON file:", err);
-      } else {
-        console.log("JSON file has been written successfully.");
-      }
-    });
+    // // Write the JSON data to a file
+    // fs.writeFile(`data/${i}.json`, jsonData, "utf8", (err) => {
+    //   if (err) {
+    //     console.error("Error writing JSON file:", err);
+    //   } else {
+    //     console.log("JSON file has been written successfully.");
+    //   }
+    // });
 
-    // const blockheader =
-    //   "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
-    // // console.log(signature);
-    // // console.log(proof);
-    // const hashiVerifier = new ethers.Contract(
-    //   HASHI_VERIFIER_ADDRESS,
-    //   HASHI_VERIFIER_ABI,
-    //   gnosisSigner
-    // );
-    // // console.log(hashiVerifier);
-    // console.log("blockheader: ", blockheader);
-    // console.log("token id: ", tokenId);
-    // console.log("signature: ", signature);
-    // console.log("stateRoot: ", stateRoot);
-    // console.log("storageHash: ", proof.storageHash);
-    // console.log("accountProof: ", proof.accountProof);
-    // console.log("storageProof: ", proof.storageProof[0].proof);
+    const blockheader =
+      "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
+    // console.log(signature);
+    // console.log(proof);
+    const hashiVerifier = new ethers.Contract(
+      HASHI_VERIFIER_ADDRESS,
+      HASHI_VERIFIER_ABI,
+      gnosisSigner
+    );
+    // console.log(hashiVerifier);
+    console.log("blockheader: ", blockheader);
+    console.log("token id: ", tokenId);
+    console.log("signature: ", signature);
+    console.log("stateRoot: ", stateRoot);
+    console.log("storageHash: ", proof.storageHash);
+    console.log("accountProof: ", proof.accountProof);
+    console.log("storageProof: ", proof.storageProof[0].proof);
     // try {
     //   const verifyOwnertx = await hashiVerifier.verifyOwner(
     //     blockheader,
