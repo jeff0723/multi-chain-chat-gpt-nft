@@ -33,24 +33,24 @@ const config: HardhatUserConfig = {
       },
       chainId: 1337,
     },
-    // gnosis: {
-    //   allowUnlimitedContractSize: true,
-    //   url: process.env.GNOSISRPCURL || "",
-    //   accounts: [process.env.GNOSISPK || ""],
-    //   chainId: 100,
-    // },
-    // auroratestnet: {
-    //   allowUnlimitedContractSize: true,
-    //   url: process.env.AURORARPC || "",
-    //   accounts: [process.env.GNOSISPK || ""],
-    //   chainId: 1313161555,
-    // },
-    // mainnet: {
-    //   url: process.env.MAINNET_URL || "",
-    //   accounts:
-    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    //   chainId: 1,
-    // },
+    gnosis: {
+      allowUnlimitedContractSize: true,
+      url: process.env.GNOSISRPCURL || "",
+      accounts: [process.env.GNOSISPK || ""],
+      chainId: 100,
+    },
+    auroratestnet: {
+      allowUnlimitedContractSize: true,
+      url: process.env.AURORARPC || "",
+      accounts: [process.env.GNOSISPK || ""],
+      chainId: 1313161555,
+    },
+    mainnet: {
+      url: process.env.MAINNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      chainId: 1,
+    },
   },
   namedAccounts: {
     deployer: {
