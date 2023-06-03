@@ -1,13 +1,13 @@
-import {HardhatRuntimeEnvironment} from 'hardhat/types';
-import {DeployFunction} from 'hardhat-deploy/types';
-import {hashiAddressGnosis, ghoulsAddress} from "../utils/constants";
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { DeployFunction } from 'hardhat-deploy/types';
+import { hashiAddressGnosis, ghoulsAddress } from "../utils/constants";
 import { ethers, network, run } from "hardhat";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-	const {deployments, getNamedAccounts} = hre;
-	const {deploy} = deployments;
+	const { deployments, getNamedAccounts } = hre;
+	const { deploy } = deployments;
 
-	const {deployer} = await getNamedAccounts();
+	const { deployer } = await getNamedAccounts();
 
 	const hashverifier = await deploy('HashiVerifier', {
 		from: deployer,
@@ -22,7 +22,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
 	const chatGPTNFT = await deploy('ChatGPTNFT', {
 		from: deployer,
-		args: constructorargsNFT, 
+		args: constructorargsNFT,
 		log: true,
 		autoMine: true,
 	})
@@ -30,12 +30,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 	await run(`verify:verify`, {
 		address: hashverifier.address,
 		constructorArguments: [hashiAddressGnosis],
-	  });
+	});
 	// console.log('Verifying HashVerifier.... ')
 	await run(`verify:verify`, {
 		address: chatGPTNFT.address,
 		constructorArguments: constructorargsNFT,
-	  });
+	});
 
 };
 export default func;
