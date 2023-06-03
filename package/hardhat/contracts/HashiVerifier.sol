@@ -35,7 +35,6 @@ contract HashiVerifier is StorageVerifier {
     function verifyOwner(
         bytes32 hashiheader,
         uint256 tokenId,
-        string memory image,
         bytes memory signature,
         bytes32 stateRoot,
         bytes32 storageRoot,
@@ -53,7 +52,7 @@ contract HashiVerifier is StorageVerifier {
 
         // Since this contract is not deployed on a network that settles on mainnet,
         // We hardcode the root and bypass the block hash check
-        bytes32 stateRoot = 0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea;
+        // bytes32 stateRoot = 0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea;
         address tokenAddress = 0xBd3531dA5CF5857e7CfAA92426877b022e612cf8;
 
         // Dedicated proof for the Pudgy

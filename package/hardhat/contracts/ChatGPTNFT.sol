@@ -2,13 +2,12 @@ pragma solidity ^0.8.17;
 
 import "./@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./@openzeppelin/contracts/access/Ownable.sol";
-import "./HashiVarifier.sol";
+import "./HashiVerifier.sol";
 
-interface IHashiVarifier {
+interface IHashiVerifier {
     function verifyOwner(
         bytes32 hashiheader,
         uint256 tokenId,
-        string memory image,
         bytes memory signature,
         bytes32 stateRoot,
         bytes32 storageRoot,
@@ -23,26 +22,44 @@ contract ChatGPTNFT is ERC721 {
     string private _baseTokenURI;
     address public originalContractAddress;
     mapping(uint256 => string) public agentURI; //id -> string
-    IHashiVarifier public hashiVarifier;
+    IHashiVerifier public hashiVerifier;
 
     constructor(
         address _originalAddress,
         string memory _originalBaseURI,
-        address _hashiVarifier
+        address _hashiVerifier
     ) ERC721("ChatGPTNFT", "CGNFT") {
         _baseTokenURI = _originalBaseURI;
         originalContractAddress = _originalAddress;
-        hashiVarifier = IHashiVarifier(_hashiVarifier);
+        hashiVerifier = IHashiVerifier(_hashiVerifier);
     }
 
     function isOriginalOwner() public returns (bool) {
         return true;
     }
 
-    function mint(address _to, uint256 _tokenId) public {
+    //update function input
+    function mint(
+        address _to,
+        bytes32 hashiheader,
+        uint256 tokenId,
+        bytes memory signature,
+        bytes32 stateRoot,
+        bytes32 storageRoot,
+        bytes[] memory stateProof,
+        bytes[] memory storageProof
+    ) public {
         //add verify function here
-        require(isOriginalOwner(), "Not original owner");
-        _safeMint(_to, _tokenId);
+        hashiVerifier.verifyOwner(
+            hashiheader,
+            tokenId,
+            signature,
+            stateRoot,
+            storageRoot,
+            stateProof,
+            storageProof
+        );
+        _safeMint(_to, tokenId);
     }
 
     function setAgentURI(uint256 _tokenId, string memory _uri) public {
