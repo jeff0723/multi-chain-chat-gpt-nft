@@ -38,8 +38,8 @@ contract ChatGPTNFT is ERC721 {
     //update function input
     function mint(
         address _to,
-        bytes32 blockheader,
         uint256 tokenId,
+        bytes32 blockheader,
         bytes memory signature,
         bytes32 stateRoot,
         bytes32 storageRoot,
