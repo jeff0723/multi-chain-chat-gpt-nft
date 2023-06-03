@@ -1,0 +1,1 @@
+import type { TaskArguments } from "hardhat/types"

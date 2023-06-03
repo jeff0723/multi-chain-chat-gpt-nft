@@ -9,6 +9,20 @@ dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
+  etherscan: {
+    apiKey: {
+      arbitrumOne: process.env.ARBISCAN_API_KEY || "",
+      avalanche: process.env.SNOWTRACE_API_KEY || "",
+      bsc: process.env.BSCSCAN_API_KEY || "",
+      gnosis: process.env.GNOSISSCAN_API_KEY || "",
+      goerli: process.env.ETHERSCAN_API_KEY || "",
+      mainnet: process.env.ETHERSCAN_API_KEY || "",
+      optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
+      polygon: process.env.POLYGONSCAN_API_KEY || "",
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
+      sepolia: process.env.ETHERSCAN_API_KEY || "",
+    },
+  },
   networks: {
     hardhat: {
       accounts: {
@@ -17,10 +31,8 @@ const config: HardhatUserConfig = {
       chainId: 1337,
     },
     gnosis: {
-      url: process.env.MAINNET_URL || "",
-      accounts: {
-        mnemonic: ""
-      },
+      url: process.env.GNOSISRPCURL || "",
+      accounts: [process.env.GNOSISPK || ""],
       chainId: 100,
     },
     mainnet: {
@@ -30,6 +42,13 @@ const config: HardhatUserConfig = {
       chainId: 1,
     },
   },
+  namedAccounts: {
+    deployer: {
+        default: 0, 
+        1: 0, 
+        100: 0,
+    },
+},
   typechain: {
     outDir: "../frontend/src/typechain",
   },
