@@ -40,8 +40,8 @@ function MintPage({ }: Props) {
         onSuccess(data, variables, context) {
             console.log(data)
         },
-        onError(error: any) {
-            console.log(error)
+        onError(error, variables, context) {
+            console.log("error: ", error)
             // toast.error(error?.data?.message ?? error?.message)
             // Mixpanel.track("publication.mirror", { result: 'write_error' })
 
@@ -49,15 +49,14 @@ function MintPage({ }: Props) {
     })
     const handleMint = async () => {
         if (!walletClient) return
-        let currentSignature;
-        if (!signature) {
+        let currentSignature = signature;
+        if (!currentSignature) {
             currentSignature = await signMessageAsync({
                 message: walletClient?.account.address || ""
             })
             window.localStorage.setItem('signature', currentSignature)
             setSignature(currentSignature)
         }
-        if (!currentSignature && !signature) return
         const mainnetRPC = "https://mainnet.infura.io/v3/dc7c60b22021400a97355601e710833d";
         const mainnetProvider = new ethers.providers.JsonRpcProvider(mainnetRPC);
 
@@ -72,6 +71,14 @@ function MintPage({ }: Props) {
         const blockheader =
             "0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99";
         console.log('here')
+        console.log('args', [
+            walletClient?.account.address,
+            1340,
+            blockheader,
+            currentSignature,
+            proof.storageHash,
+            proof.accountProof,
+            proof.storageProof[0].proof,])
         write({
             args: [
                 walletClient?.account.address,
