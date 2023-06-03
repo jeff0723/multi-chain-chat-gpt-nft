@@ -581,6 +581,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ChatGPTNFT__factory>;
     getContractFactory(
+      name: "IHashiVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IHashiVerifier__factory>;
+    getContractFactory(
+      name: "HashiVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HashiVerifier__factory>;
+    getContractFactory(
       name: "IHashi",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IHashi__factory>;
@@ -596,10 +604,6 @@ declare module "hardhat/types/runtime" {
       name: "MPT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MPT__factory>;
-    getContractFactory(
-      name: "ClaimPenguin",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ClaimPenguin__factory>;
     getContractFactory(
       name: "StorageVerifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -1316,6 +1320,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ChatGPTNFT>;
     getContractAt(
+      name: "IHashiVerifier",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IHashiVerifier>;
+    getContractAt(
+      name: "HashiVerifier",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HashiVerifier>;
+    getContractAt(
       name: "IHashi",
       address: string,
       signer?: ethers.Signer
@@ -1335,11 +1349,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MPT>;
-    getContractAt(
-      name: "ClaimPenguin",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ClaimPenguin>;
     getContractAt(
       name: "StorageVerifier",
       address: string,

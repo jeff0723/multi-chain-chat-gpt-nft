@@ -1,25 +1,27 @@
-import { ethers } from "hardhat";
+import {HardhatRuntimeEnvironment} from 'hardhat/types';
+import {DeployFunction} from 'hardhat-deploy/types';
+import {parseEther} from 'ethers/lib/utils';
+import {hashiAddressGnosis} from '../utils/constants.ts';
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+	const {deployments, getNamedAccounts} = hre;
+	const {deploy} = deployments;
 
-  const lockedAmount = ethers.utils.parseEther("1");
+	const {deployer} = await getNamedAccounts();
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+	await deploy('HashiVerifier', {
+		from: deployer,
+		args: [hashiAddressGnosis],
+		log: true,
+		autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
+	});
 
-  await lock.deployed();
-
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
-}
-
-// hashi deployment address: 0xBB38ad32c211a2B726B1E398234c8404247c5a3c
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+  await deploy('ChatGPTNFT', {
+    from: deployer,
+    args: [constructorargsNFT], 
+    logs: true,
+    autoMine: true,
+  })
+};
+export default func;
+func.tags = ['HashiVerifier'];

@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as openzeppelin from "./@openzeppelin";
-export * as nftMinterSol from "./NFTMinter.sol";
+export * as chatGptnftSol from "./ChatGPTNFT.sol";
 export * as interfaces from "./interfaces";
-export { ChatGPTNFT__factory } from "./ChatGPTNFT__factory";
+export { HashiVerifier__factory } from "./HashiVerifier__factory";
 export { Lock__factory } from "./Lock__factory";
 export { MPT__factory } from "./MPT__factory";
 export { StorageVerifier__factory } from "./StorageVerifier__factory";

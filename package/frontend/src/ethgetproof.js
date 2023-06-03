@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { AzukiAddress } from "../utils/constants";
+import { PudgyAddress, PudgySlot } from "../utils/constants";
 dotenv.config();
 
 // after the client calls getBlockHeader, and you now have the block header
@@ -10,6 +10,8 @@ async function claimNFT(nft, blockhash) {
   const RPC = "https://mainnet.infura.io/v3/dc7c60b22021400a97355601e710833d";
   const provider = new ethers.providers.JsonRpcProvider(RPC);
 
+  const slot = PudgySlot(nft.tokenId);
+
   const blockNumber = await provider.send("eth_getBlockByHash", [
     blockhash,
     false,
@@ -18,20 +20,20 @@ async function claimNFT(nft, blockhash) {
   // !!! get the correct slot for the NFT
 
   const proof = await provider.send("eth_getProof", [
-    AzukiAddress,
+    PudgyAddress,
     [slot], // !!! define the slot
     blockNumber,
   ]);
 
   const blockInfo = await provider.getBlock(blockNumber);
 
-  const storageRoot = blockInfo["result"]["stateRoot"];
+  const stateRoot = blockInfo["result"]["stateRoot"];
 
-  await claimAzuki(
-    nft.tokenId,
-    nft.imageUrl,
+  await verifyOwner(
     blockheader,
+    nft.tokenId,
     signature,
+    stateRoot,
     proof.storageHash,
     proof.accountProof,
     proof.storageProof[0].proof

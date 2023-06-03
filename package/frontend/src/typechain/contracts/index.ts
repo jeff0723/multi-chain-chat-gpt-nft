@@ -3,11 +3,11 @@
 /* eslint-disable */
 import type * as openzeppelin from "./@openzeppelin";
 export type { openzeppelin };
-import type * as nftMinterSol from "./NFTMinter.sol";
-export type { nftMinterSol };
+import type * as chatGptnftSol from "./ChatGPTNFT.sol";
+export type { chatGptnftSol };
 import type * as interfaces from "./interfaces";
 export type { interfaces };
-export type { ChatGPTNFT } from "./ChatGPTNFT";
+export type { HashiVerifier } from "./HashiVerifier";
 export type { Lock } from "./Lock";
 export type { MPT } from "./MPT";
 export type { StorageVerifier } from "./StorageVerifier";
