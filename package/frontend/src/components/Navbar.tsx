@@ -7,12 +7,11 @@ const NavbarContainer = styled.div`
     width: 100%;
     padding: 20px;
     display:flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 `
 const Navbar = (props: Props) => {
     return (
         <NavbarContainer>
-            <div>Chat gpt NFT</div>
             <ConnectButton />
         </NavbarContainer>
     )

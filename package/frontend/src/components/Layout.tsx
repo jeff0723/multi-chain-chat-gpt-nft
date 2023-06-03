@@ -1,8 +1,9 @@
 import { FC, ReactNode, Suspense, useEffect, useState } from "react";
-import SideBar from "./Sidebar";
-import Navbar from "./Navbar";
 import styled from 'styled-components';
+import dynamic from "next/dynamic";
 
+const Navbar = dynamic(() => import("./Navbar"), { suspense: true });
+const SideBar = dynamic(() => import("./Sidebar"), { suspense: true });
 interface Props {
     children: ReactNode;
 }
@@ -15,15 +16,24 @@ const LayoutContainer = styled.div`
 const MainContent = styled.div`
     display:flex;
     width:100%;
+    background: #343541;
 `
 const Layout: FC<Props> = ({ children }) => {
+    const [mounted, setMounted] = useState<boolean>(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+    if (!mounted) return <div className="flex h-screen w-full justify-center items-center">
+        <div>Loading</div>
+    </div>;
     return (
         <LayoutContainer>
-            <Navbar />
+
             {/* Sidebar */}
             <MainContent>
                 <SideBar />
-                <div className="flex flex-1">
+                <div className="flex flex-col flex-1">
+                    <Navbar />
                     {children}
                 </div>
             </MainContent>
