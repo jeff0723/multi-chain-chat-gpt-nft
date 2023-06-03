@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import type { Provider } from "@ethersproject/providers";
 import type {
   StorageVerifier,
   StorageVerifierInterface,
@@ -31,7 +31,7 @@ const _abi = [
     name: "InvalidStorageProof",
     type: "error",
   },
-];
+] as const;
 
 export class StorageVerifier__factory {
   static readonly abi = _abi;
