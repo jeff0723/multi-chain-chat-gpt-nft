@@ -25,22 +25,24 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
+      allowUnlimitedContractSize: true,
       accounts: {
         mnemonic: "test test test test test test test test test test test junk",
       },
       chainId: 1337,
     },
-    // gnosis: {
-    //   url: process.env.GNOSISRPCURL || "",
-    //   accounts: [process.env.GNOSISPK || ""],
-    //   chainId: 100,
-    // },
-    // mainnet: {
-    //   url: process.env.MAINNET_URL || "",
-    //   accounts:
-    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    //   chainId: 1,
-    // },
+    gnosis: {
+      allowUnlimitedContractSize: true,
+      url: process.env.GNOSISRPCURL || "",
+      accounts: [process.env.PK || ""],
+      chainId: 100,
+    },
+    mainnet: {
+      url: process.env.MAINNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      chainId: 1,
+    },
   },
   namedAccounts: {
     deployer: {
