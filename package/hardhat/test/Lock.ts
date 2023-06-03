@@ -8,6 +8,19 @@ describe("Lock", function () {
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
   async function deployOneYearLockFixture() {
+
+
+    function verifyOwner(
+      bytes32 blockheader,
+      uint256 tokenId,
+      bytes memory signature,
+      bytes32 stateRoot,
+      bytes32 storageRoot,
+      bytes[] memory stateProof,
+      bytes[] memory storageProof
+  )
+
+  
     const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
     const ONE_GWEI = 1_000_000_000;
 
