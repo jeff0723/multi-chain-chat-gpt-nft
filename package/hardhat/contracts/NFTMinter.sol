@@ -18,7 +18,7 @@ contract claimPenguin is StorageVerifier {
     // use hashi to get the current stateroot and return the blockNumber
 
     constructor(address hashiaddress) {
-        hashi = IHashi(hashiaddress);
+        hashiInterface = IHashi(hashiaddress);
     }
 
     /// @notice Explain to an end user what this does
