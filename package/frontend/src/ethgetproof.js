@@ -1,7 +1,12 @@
 import dotenv from "dotenv";
 import { PudgyAddress, PudgySlot } from "../utils/constants";
 dotenv.config();
+async function getSignature(signer, address) {
+  const message = ethers.utils.defaultAbiCoder.encode(["address"], [address]);
 
+  const signature = await signer?.signMessage(ethers.utils.arrayify(message));
+  return signature;
+}
 // after the client calls getBlockHeader, and you now have the block header
 // use this function to get the relevant account and storage proofs
 // nft is a struct that containsthe tokenId and the imageURL
