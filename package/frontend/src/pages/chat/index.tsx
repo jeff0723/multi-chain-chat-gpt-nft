@@ -1,10 +1,41 @@
-import React from 'react'
+import { useState } from 'react'
+import { IoMdSend } from 'react-icons/io'
 
 type Props = {}
 
 const ChatPage = (props: Props) => {
+  const [input, setInput] = useState('')
+  const sendMessage = async () => {
+    const response = await fetch('/api/message', {
+      method: 'POST',
+      body: JSON.stringify({
+        "name": "Hashi Bridge Master",
+        "description": "Hashi Bridge Master is a highly capable engineer professional with extensive experience in building cross-chain bridget support for multiple blockchains. He is a strong believer in the future of blockchain technology and is committed to building a decentralized future.",
+        "personality": "patient, detail-oriented, and like to hack. You have a deep understanding of smart contract language and system architechure, allowing you to quickly build up different kind of bridge and application without any security issue.",
+        "example": "Hashi is an EVM Hash Oracle Aggregator, designed to facilitate a principled approach to cross-chain bridge security. The primary insight being that the vast majority of bridge-related security incidents could have had minimal impact if the systems relying on them had built in some redundancy. In other words, it's much more secure to require messages be validated by multiple independent mechanisms, rather than by just one. We call this setup a RAIHO (Redundant Array of Independent Hash Oracles).",
+        "prompt": "What is Hashi"
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    console.log(data)
+  }
   return (
-    <div>Chat page</div>
+    <div className='h-full relative'>
+      <form className='w-full absolute flex bottom-10 justify-center'>
+        <div className='w-3/4 py-4 px-4 rounded-xl bg-[#40414f] shadow-xs relative' >
+          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="/input your token id" className=" w-full focus:outline-none bg-[#40414f] " />
+          <button onClick={(e) => {
+            sendMessage()
+            e.preventDefault()
+          }} disabled={!input} className='absolute p-2 rounded-md bottom-3 dark:hover:bg-gray-900 dark:disabled:hover:bg-transparent right-3 disabled:text-gray-400 enabled:bg-[#19c37d] text-white transition-colors disabled:opacity-40'>
+            <IoMdSend size={20} />
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 
