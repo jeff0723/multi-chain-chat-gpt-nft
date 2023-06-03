@@ -19,11 +19,21 @@ const mainnetRPC =
 const mainnetProvider = new ethers.providers.JsonRpcProvider(mainnetRPC);
 const mainnetSigner = new ethers.Wallet(process.env.GNOSISPK, mainnetProvider);
 
-const gnosisRPC = "https://rpc.ankr.com/gnosis";
-const gnosisProvider = new ethers.providers.JsonRpcProvider(gnosisRPC);
-const gnosisSigner = new ethers.Wallet(process.env.GNOSISPK, gnosisProvider);
+let testRPC;
+let testProvider;
+let testSigner;
 
-console.log(ethers.utils.formatEther(await gnosisSigner.getBalance()));
+if (process.env.TEST_NETWORK == "Gnosis") {
+  testRPC = "https://rpc.ankr.com/gnosis";
+  testProvider = new ethers.providers.JsonRpcProvider(testRPC);
+  testSigner = new ethers.Wallet(process.env.GNOSISPK, testProvider);
+} else if (process.env.TEST_NETWORK == "Near") {
+  testRPC = "https://rpc.ankr.com/gnosis";
+  testProvider = new ethers.providers.JsonRpcProvider(testRPC);
+  testSigner = new ethers.Wallet(process.env.GNOSISPK, testProvider);
+}
+
+console.log(ethers.utils.formatEther(await testSigner.getBalance()));
 
 async function getSignature() {
   const message = ethers.utils.defaultAbiCoder.encode(
@@ -42,7 +52,7 @@ async function testContract() {
   const hashiVerifier = new ethers.Contract(
     HASHI_VERIFIER_ADDRESS,
     HASHI_VERIFIER_ABI,
-    gnosisSigner
+    testSigner
   );
 
   const slot = ghoulsSlotOf(GHOULTOKENID);
@@ -102,7 +112,7 @@ async function testContract() {
   const chatgpt_nft = new ethers.Contract(
     CHATGPTNFT_ADDRESS,
     CHATGPTNFT_ABI,
-    gnosisSigner
+    testSigner
   );
 
   const mint = await chatgpt_nft.mint(

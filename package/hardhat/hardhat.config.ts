@@ -21,8 +21,8 @@ const config: HardhatUserConfig = {
       polygon: process.env.POLYGONSCAN_API_KEY || "",
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
       sepolia: process.env.ETHERSCAN_API_KEY || "",
-      aurora: process.env.AURORASCAN_API_KEY || "",
-      auroratestnet: process.env.AURORASCAN_API_KEY || "",
+      aurora: process.env.AURORA_MAINNET_RPC || "",
+      auroratestnet: process.env.AURORA_TESTNET_RPC || "",
     },
   },
   networks: {
@@ -39,9 +39,14 @@ const config: HardhatUserConfig = {
       accounts: [process.env.GNOSISPK || ""],
       chainId: 100,
     },
+    aurora: {
+      url: process.env.AURORA_MAINNET_RPC || "",
+      accounts: [process.env.GNOSISPK || ""],
+      chainId: 1313161554, 
+    }, 
     auroratestnet: {
       allowUnlimitedContractSize: true,
-      url: process.env.AURORARPC || "",
+      url: process.env.AURORA_TESTNET_RPC || "",
       accounts: [process.env.GNOSISPK || ""],
       chainId: 1313161555,
     },
