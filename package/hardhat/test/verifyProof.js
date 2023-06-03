@@ -35,7 +35,6 @@ async function getSignature() {
 
 async function testContract() {
   const signature = await getSignature();
-  CURRENTBLOCKHEIGHT;
 
   // await mainnetProvider.send("eth_blockNumber");
   const blockHash = await mainnetProvider.send("eth_getBlockByNumber", [

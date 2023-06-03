@@ -23,7 +23,7 @@ interface HashiVerifierInterface extends ethers.utils.Interface {
   functions: {
     "getBlockHeader()": FunctionFragment;
     "hashiheader()": FunctionFragment;
-    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes32,bytes[],bytes[])": FunctionFragment;
+    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -39,7 +39,6 @@ interface HashiVerifierInterface extends ethers.utils.Interface {
     values: [
       BytesLike,
       BigNumberish,
-      BytesLike,
       BytesLike,
       BytesLike,
       BytesLike[],
@@ -115,7 +114,6 @@ export class HashiVerifier extends BaseContract {
       blockheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -131,7 +129,6 @@ export class HashiVerifier extends BaseContract {
     blockheader: BytesLike,
     tokenId: BigNumberish,
     signature: BytesLike,
-    stateRoot: BytesLike,
     storageRoot: BytesLike,
     stateProof: BytesLike[],
     storageProof: BytesLike[],
@@ -147,7 +144,6 @@ export class HashiVerifier extends BaseContract {
       blockheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -166,7 +162,6 @@ export class HashiVerifier extends BaseContract {
       blockheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
@@ -183,7 +178,6 @@ export class HashiVerifier extends BaseContract {
       blockheader: BytesLike,
       tokenId: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
       storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],

@@ -16,12 +16,12 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
+import { mainnet, polygon, optimism, arbitrum, aurora, gnosis } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum],
+  [gnosis, aurora, mainnet, polygon, optimism, arbitrum],
   [
     publicProvider()
   ]
