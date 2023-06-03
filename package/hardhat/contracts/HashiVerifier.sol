@@ -40,6 +40,7 @@ contract HashiVerifier is StorageVerifier {
     ) external {
         // verify that the blockheader inputted is the current stored hashi header
         // Note in practice this does nothing until we verify block contents
+
         require(blockheader == hashiheader, "blockheader is incorrect");
         // recover owner for storage slot access
         bytes32 message = abi.encode(msg.sender).toEthSignedMessageHash();

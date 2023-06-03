@@ -10,7 +10,6 @@ interface IHashiVerifier {
         bytes32 hashiheader,
         uint256 tokenId,
         bytes memory signature,
-        bytes32 stateRoot,
         bytes32 storageRoot,
         bytes[] memory stateProof,
         bytes[] memory storageProof
@@ -41,7 +40,6 @@ contract ChatGPTNFT is ERC721 {
         uint256 tokenId,
         bytes32 blockheader,
         bytes memory signature,
-        bytes32 stateRoot,
         bytes32 storageRoot,
         bytes[] memory stateProof,
         bytes[] memory storageProof
@@ -51,7 +49,6 @@ contract ChatGPTNFT is ERC721 {
             blockheader,
             tokenId,
             signature,
-            stateRoot,
             storageRoot,
             stateProof,
             storageProof
