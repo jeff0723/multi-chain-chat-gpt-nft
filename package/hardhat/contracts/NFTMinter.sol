@@ -32,7 +32,7 @@ contract claimPenguin is StorageVerifier {
             "0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea";
     }
 
-    function claim(
+    function verifyOwner(
         bytes32 hashiheader,
         uint256 tokenId,
         string memory image,
