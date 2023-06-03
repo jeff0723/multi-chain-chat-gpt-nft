@@ -2,6 +2,20 @@ pragma solidity ^0.8.17;
 
 import "./@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./@openzeppelin/contracts/access/Ownable.sol";
+import "./HashiVarifier.sol";
+
+interface IHashiVarifier {
+    function verifyOwner(
+        bytes32 hashiheader,
+        uint256 tokenId,
+        string memory image,
+        bytes memory signature,
+        bytes32 stateRoot,
+        bytes32 storageRoot,
+        bytes[] memory stateProof,
+        bytes[] memory storageProof
+    ) external;
+}
 
 contract ChatGPTNFT is ERC721 {
     using Address for address;
@@ -9,13 +23,16 @@ contract ChatGPTNFT is ERC721 {
     string private _baseTokenURI;
     address public originalContractAddress;
     mapping(uint256 => string) public agentURI; //id -> string
+    IHashiVarifier public hashiVarifier;
 
     constructor(
         address _originalAddress,
-        string memory _originalBaseURI
+        string memory _originalBaseURI,
+        address _hashiVarifier
     ) ERC721("ChatGPTNFT", "CGNFT") {
         _baseTokenURI = _originalBaseURI;
         originalContractAddress = _originalAddress;
+        hashiVarifier = IHashiVarifier(_hashiVarifier);
     }
 
     function isOriginalOwner() public returns (bool) {

@@ -41,7 +41,7 @@ contract HashiVerifier is StorageVerifier {
         bytes32 storageRoot,
         bytes[] memory stateProof,
         bytes[] memory storageProof
-    ) public {
+    ) external {
         // verify that the blockheader inputted is the current stored hashi header
         if (hashiheader != blockheader) {
             revert InvalidHashiHash();
