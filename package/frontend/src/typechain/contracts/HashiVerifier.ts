@@ -13,7 +13,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -25,15 +29,20 @@ import type {
 export interface HashiVerifierInterface extends utils.Interface {
   functions: {
     "getBlockHeader()": FunctionFragment;
+    "hashiheader()": FunctionFragment;
     "verifyOwner(bytes32,uint256,bytes,bytes32,bytes32,bytes[],bytes[])": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "getBlockHeader" | "verifyOwner"
+    nameOrSignatureOrTopic: "getBlockHeader" | "hashiheader" | "verifyOwner"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "getBlockHeader",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hashiheader",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -54,12 +63,40 @@ export interface HashiVerifierInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "hashiheader",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "verifyOwner",
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "accountproofcomplete()": EventFragment;
+    "storageproofcomplete()": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "accountproofcomplete"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "storageproofcomplete"): EventFragment;
 }
+
+export interface accountproofcompleteEventObject {}
+export type accountproofcompleteEvent = TypedEvent<
+  [],
+  accountproofcompleteEventObject
+>;
+
+export type accountproofcompleteEventFilter =
+  TypedEventFilter<accountproofcompleteEvent>;
+
+export interface storageproofcompleteEventObject {}
+export type storageproofcompleteEvent = TypedEvent<
+  [],
+  storageproofcompleteEventObject
+>;
+
+export type storageproofcompleteEventFilter =
+  TypedEventFilter<storageproofcompleteEvent>;
 
 export interface HashiVerifier extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -90,6 +127,8 @@ export interface HashiVerifier extends BaseContract {
   functions: {
     getBlockHeader(overrides?: CallOverrides): Promise<[string]>;
 
+    hashiheader(overrides?: CallOverrides): Promise<[string]>;
+
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
@@ -103,6 +142,8 @@ export interface HashiVerifier extends BaseContract {
   };
 
   getBlockHeader(overrides?: CallOverrides): Promise<string>;
+
+  hashiheader(overrides?: CallOverrides): Promise<string>;
 
   verifyOwner(
     blockheader: BytesLike,
@@ -118,6 +159,8 @@ export interface HashiVerifier extends BaseContract {
   callStatic: {
     getBlockHeader(overrides?: CallOverrides): Promise<string>;
 
+    hashiheader(overrides?: CallOverrides): Promise<string>;
+
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
@@ -130,10 +173,18 @@ export interface HashiVerifier extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "accountproofcomplete()"(): accountproofcompleteEventFilter;
+    accountproofcomplete(): accountproofcompleteEventFilter;
+
+    "storageproofcomplete()"(): storageproofcompleteEventFilter;
+    storageproofcomplete(): storageproofcompleteEventFilter;
+  };
 
   estimateGas: {
     getBlockHeader(overrides?: CallOverrides): Promise<BigNumber>;
+
+    hashiheader(overrides?: CallOverrides): Promise<BigNumber>;
 
     verifyOwner(
       blockheader: BytesLike,
@@ -149,6 +200,8 @@ export interface HashiVerifier extends BaseContract {
 
   populateTransaction: {
     getBlockHeader(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    hashiheader(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     verifyOwner(
       blockheader: BytesLike,

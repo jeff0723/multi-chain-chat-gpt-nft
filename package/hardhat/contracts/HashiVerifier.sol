@@ -10,8 +10,6 @@ contract HashiVerifier is StorageVerifier {
     using ECDSA for bytes32;
     using ECDSA for bytes;
 
-    error InvalidHashiHash();
-
     bytes32 public immutable hashiheader =
         0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99;
     IHashi private immutable hashiInterface;
@@ -35,26 +33,23 @@ contract HashiVerifier is StorageVerifier {
     function verifyOwner(
         bytes32 blockheader,
         uint256 tokenId,
+        uint256 positionVariable,
         bytes memory signature,
         bytes32 stateRoot,
-        bytes32 storageRoot,
         bytes[] memory stateProof,
         bytes[] memory storageProof
     ) external {
         // verify that the blockheader inputted is the current stored hashi header
         // Note in practice this does nothing until we verify block contents
-        // if (blockheader != hashiheader) {
-        //     revert InvalidHashiHash();
-        // }
-
+        require(blockheader == hashiheader, "blockheader is incorrect");
         // recover owner for storage slot access
         bytes32 message = abi.encode(msg.sender).toEthSignedMessageHash();
         address owner = message.recover(signature);
 
         // Since this contract is not deployed on a network that settles on mainnet,
-        // We hardcode the root and bypass the block hash check
-        // bytes32 stateRoot = 0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea;
+        // Hardcode the storageRoot
         address tokenAddress = 0xBd3531dA5CF5857e7CfAA92426877b022e612cf8;
+        bytes32 storageRoot = 0xa1a5b0fd00fb6c6bea13c4178af465a2cd211f25027b11298c9afe03c1383414;
 
         // Dedicated proof for the Pudgy
         MPT.Account memory pudgyPenguins = MPT.Account({
@@ -67,17 +62,17 @@ contract HashiVerifier is StorageVerifier {
 
         // Expectation: the slot contains the address of the owner
         MPT.StorageSlot memory slot = MPT.StorageSlot({
-            position: uint256(keccak256(abi.encode(tokenId, 103))),
+            position: uint256(keccak256(abi.encode(tokenId, positionVariable))),
             value: uint256(uint160(owner))
         });
 
         // Then verify the proof
-        // _verifyStorage(
-        //     stateRoot,
-        //     pudgyPenguins,
-        //     slot,
-        //     stateProof,
-        //     storageProof
-        // );
+        _verifyStorage(
+            stateRoot,
+            pudgyPenguins,
+            slot,
+            stateProof,
+            storageProof
+        );
     }
 }
