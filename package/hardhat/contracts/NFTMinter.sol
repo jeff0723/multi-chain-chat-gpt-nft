@@ -21,11 +21,7 @@ contract claimPenguin is StorageVerifier {
         hashiInterface = IHashi(hashiaddress);
     }
 
-    /// @notice Explain to an end user what this does
-    /// @dev Explain to a developer any extra details
-    /// @param Documents a parameter just like in doxygen (must be followed by parameter name)
-    /// @return Documents the return variables of a contract’s function state variable
-    function getBlockHeader() {
+    function getBlockHeader() public view returns (string memory) {
         // blockheader = Hashi.getHash(uint256 domain,
         // uint256 id,
         // IOracleAdapter[] memory oracleAdapters)
@@ -36,11 +32,7 @@ contract claimPenguin is StorageVerifier {
             "0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea";
     }
 
-    /// @notice Upon proving that owner owns
-    /// @dev Explain to a developer any extra details
-    /// @param Documents a parameter just like in doxygen (must be followed by parameter name)
-    /// @return Documents the return variables of a contract’s function state variable
-    function claimPenguin(
+    function claim(
         bytes32 hashiheader,
         uint256 tokenId,
         string memory image,
@@ -56,7 +48,7 @@ contract claimPenguin is StorageVerifier {
         }
 
         // recover owner for storage slot access
-        bytes32 message = abi.encode(_msgSender()).toEthSignedMessageHash();
+        bytes32 message = abi.encode(msg.sender).toEthSignedMessageHash();
         address owner = message.recover(signature);
 
         // Since this contract is not deployed on a network that settles on mainnet,
