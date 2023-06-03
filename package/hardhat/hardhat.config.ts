@@ -16,6 +16,12 @@ const config: HardhatUserConfig = {
       },
       chainId: 1337,
     },
+    gnosis: {
+      url: process.env.MAINNET_URL || "",
+      accounts: {
+        mnemonic: ""
+      },
+      chainId: 100,
     },
     mainnet: {
       url: process.env.MAINNET_URL || "",
