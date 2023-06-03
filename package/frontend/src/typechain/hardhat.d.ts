@@ -569,6 +569,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IOracleAdapter__factory>;
     getContractFactory(
+      name: "Lock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Lock__factory>;
+    getContractFactory(
       name: "MPT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MPT__factory>;
@@ -1272,6 +1276,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IOracleAdapter>;
+    getContractAt(
+      name: "Lock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Lock>;
     getContractAt(
       name: "MPT",
       address: string,

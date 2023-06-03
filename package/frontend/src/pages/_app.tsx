@@ -2,7 +2,8 @@ import Layout from '@/components/Layout'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import '@rainbow-me/rainbowkit/styles.css';
-
+import { Provider } from 'react-redux';
+import store from "../state";
 import {
   getDefaultWallets,
   RainbowKitProvider,
@@ -18,6 +19,7 @@ import {
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, aurora, gnosis } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import ApplicationUpdater from '@/state/updater';
 
 
 const { chains, publicClient } = configureChains(
@@ -58,12 +60,16 @@ const wagmiConfig = createConfig({
 })
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider theme={darkTheme()} chains={chains} appInfo={demoAppInfo}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <Provider store={store}>
+
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider theme={darkTheme()} chains={chains} appInfo={demoAppInfo}>
+          <ApplicationUpdater />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </Provider>
   )
 }
