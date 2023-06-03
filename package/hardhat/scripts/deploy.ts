@@ -15,6 +15,8 @@ async function main() {
   console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
 }
 
+// hashi deployment address: 0xBB38ad32c211a2B726B1E398234c8404247c5a3c
+
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
