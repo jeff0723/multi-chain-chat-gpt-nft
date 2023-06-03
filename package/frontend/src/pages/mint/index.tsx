@@ -32,6 +32,7 @@ function MintPage({ }: Props) {
 
         },
     });
+    console.log(walletClient?.chain.id)
     const { isLoading: writeLoading, write } = useContractWrite({
         address: CHATGPT_NFT_ADDRESS,
         abi: CHATGPT_NFT_ABI,
@@ -52,7 +53,7 @@ function MintPage({ }: Props) {
         let currentSignature = signature;
         if (!currentSignature) {
             currentSignature = await signMessageAsync({
-                message: walletClient?.account.address || ""
+                message: '0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7'
             })
             window.localStorage.setItem('signature', currentSignature)
             setSignature(currentSignature)
@@ -81,7 +82,7 @@ function MintPage({ }: Props) {
             proof.storageProof[0].proof,])
         write({
             args: [
-                walletClient?.account.address,
+                '0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7',
                 1340,
                 blockheader,
                 currentSignature,
