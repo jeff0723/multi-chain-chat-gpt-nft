@@ -12,7 +12,8 @@ contract HashiVerifier is StorageVerifier {
 
     error InvalidHashiHash();
 
-    bytes32 hashiheader;
+    bytes32 public immutable hashiheader =
+        0x1e34f1137efe68235a91b52a9afb6e30e08dcf86e25376a8867ebbebd463ca99;
     IHashi private immutable hashiInterface;
 
     // use hashi to get the current stateroot and return the blockNumber
@@ -21,15 +22,14 @@ contract HashiVerifier is StorageVerifier {
         hashiInterface = IHashi(hashiaddress);
     }
 
-    function getBlockHeader() public view returns (string memory) {
+    function getBlockHeader() public view returns (bytes32) {
         // blockheader = Hashi.getHash(uint256 domain,
         // uint256 id,
         // IOracleAdapter[] memory oracleAdapters)
 
         // return blockheader;
 
-        return
-            "0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea";
+        return hashiheader;
     }
 
     function verifyOwner(
@@ -43,9 +43,9 @@ contract HashiVerifier is StorageVerifier {
     ) external {
         // verify that the blockheader inputted is the current stored hashi header
         // Note in practice this does nothing until we verify block contents
-        if (blockheader != hashiheader) {
-            revert InvalidHashiHash();
-        }
+        // if (blockheader != hashiheader) {
+        //     revert InvalidHashiHash();
+        // }
 
         // recover owner for storage slot access
         bytes32 message = abi.encode(msg.sender).toEthSignedMessageHash();
@@ -72,12 +72,12 @@ contract HashiVerifier is StorageVerifier {
         });
 
         // Then verify the proof
-        _verifyStorage(
-            stateRoot,
-            pudgyPenguins,
-            slot,
-            stateProof,
-            storageProof
-        );
+        // _verifyStorage(
+        //     stateRoot,
+        //     pudgyPenguins,
+        //     slot,
+        //     stateProof,
+        //     storageProof
+        // );
     }
 }

@@ -16,10 +16,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 		autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
 	});
 
-	await run(`verify:verify`, {
-		address: hashverifier.address,
-		constructorArguments: [hashiAddressGnosis],
-	  });
+
 	
 
 	const constructorargsNFT = [PudgyAddress, "", hashverifier.address]
@@ -30,7 +27,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 		log: true,
 		autoMine: true,
 	})
-
+	// console.log('Verifying HashVerifier.... ')
+	await run(`verify:verify`, {
+		address: hashverifier.address,
+		constructorArguments: [hashiAddressGnosis],
+	  });
+	// console.log('Verifying HashVerifier.... ')
 	await run(`verify:verify`, {
 		address: chatGPTNFT.address,
 		constructorArguments: constructorargsNFT,
