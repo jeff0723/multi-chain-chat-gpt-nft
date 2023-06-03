@@ -30,25 +30,25 @@ const config: HardhatUserConfig = {
       },
       chainId: 1337,
     },
-    gnosis: {
-      url: process.env.GNOSISRPCURL || "",
-      accounts: [process.env.GNOSISPK || ""],
-      chainId: 100,
-    },
-    mainnet: {
-      url: process.env.MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      chainId: 1,
-    },
+    // gnosis: {
+    //   url: process.env.GNOSISRPCURL || "",
+    //   accounts: [process.env.GNOSISPK || ""],
+    //   chainId: 100,
+    // },
+    // mainnet: {
+    //   url: process.env.MAINNET_URL || "",
+    //   accounts:
+    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    //   chainId: 1,
+    // },
   },
   namedAccounts: {
     deployer: {
-        default: 0, 
-        1: 0, 
-        100: 0,
+      default: 0,
+      1: 0,
+      100: 0,
     },
-},
+  },
   typechain: {
     outDir: "../frontend/src/typechain",
   },
