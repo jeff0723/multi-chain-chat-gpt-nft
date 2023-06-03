@@ -51,7 +51,7 @@ async function testContract(tokenId) {
     proof.storageProof[0].proof
   );
 
-  console.log(proof);
+  console.log(verifyOwnertx);
 }
 
 testContract(20);
