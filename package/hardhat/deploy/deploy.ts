@@ -1,6 +1,6 @@
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {DeployFunction} from 'hardhat-deploy/types';
-import {hashiAddressGnosis, PudgyAddress} from "../utils/constants";
+import {hashiAddressGnosis, ghoulsAddress} from "../utils/constants";
 import { ethers, network, run } from "hardhat";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
@@ -16,10 +16,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 		autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
 	});
 
+	console.log(hashverifier.address)
 
-	
-
-	const constructorargsNFT = [PudgyAddress, "", hashverifier.address]
+	const constructorargsNFT = [ghoulsAddress, "", hashverifier.address]
 
 	const chatGPTNFT = await deploy('ChatGPTNFT', {
 		from: deployer,
