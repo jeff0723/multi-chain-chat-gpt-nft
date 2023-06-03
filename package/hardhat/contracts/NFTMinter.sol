@@ -68,7 +68,7 @@ contract claimPenguin is StorageVerifier {
             balance: 0,
             nonce: 1,
             storageRoot: storageRoot,
-            codeHash: 0xfc1ea81db44e2de921b958dc92da921a18968ff3f3465bd475fb86dd1af03986
+            codeHash: 0x5184c58406e07d654a5e39591c5adf95a8de48e5ea96eec2f4666d84ab248b09
         });
 
         // Expectation: the slot contains the address of the owner
