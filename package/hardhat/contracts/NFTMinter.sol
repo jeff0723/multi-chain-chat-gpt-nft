@@ -4,7 +4,7 @@ pragma solidity >=0.8.0;
 import {MPT} from "./MPT.sol";
 import {StorageVerifier} from "./StorageVerifier.sol";
 import {IHashi} from "./interfaces/IHashi.sol";
-import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {ECDSA} from "./@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract claimPenguin is StorageVerifier {
     using ECDSA for bytes32;
