@@ -4,7 +4,7 @@ type Props = {}
 
 const SettingsPage = (props: Props) => {
     return (
-        <div>Settings</div>
+        <div className='px-[20px] flex'>Settings</div>
     )
 }
 
