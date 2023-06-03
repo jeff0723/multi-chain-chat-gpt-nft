@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
 import "./@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -41,7 +42,7 @@ contract ChatGPTNFT is ERC721 {
     //update function input
     function mint(
         address _to,
-        bytes32 hashiheader,
+        bytes32 blockheader,
         uint256 tokenId,
         bytes memory signature,
         bytes32 stateRoot,
@@ -51,7 +52,7 @@ contract ChatGPTNFT is ERC721 {
     ) public {
         //add verify function here
         hashiVerifier.verifyOwner(
-            hashiheader,
+            blockheader,
             tokenId,
             signature,
             stateRoot,

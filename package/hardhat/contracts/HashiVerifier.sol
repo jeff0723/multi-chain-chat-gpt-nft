@@ -12,7 +12,7 @@ contract HashiVerifier is StorageVerifier {
 
     error InvalidHashiHash();
 
-    bytes32 blockheader;
+    bytes32 hashiheader;
     IHashi private immutable hashiInterface;
 
     // use hashi to get the current stateroot and return the blockNumber
@@ -33,7 +33,7 @@ contract HashiVerifier is StorageVerifier {
     }
 
     function verifyOwner(
-        bytes32 hashiheader,
+        bytes32 blockheader,
         uint256 tokenId,
         bytes memory signature,
         bytes32 stateRoot,
@@ -42,7 +42,8 @@ contract HashiVerifier is StorageVerifier {
         bytes[] memory storageProof
     ) external {
         // verify that the blockheader inputted is the current stored hashi header
-        if (hashiheader != blockheader) {
+        // Note in practice this does nothing until we verify block contents
+        if (blockheader != hashiheader) {
             revert InvalidHashiHash();
         }
 
