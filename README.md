@@ -4,19 +4,19 @@
 
 Multichain-GPT-NFT is
 
-- A "lightclient"
+- A "lightclient" 🏮
   - smart contract that stores blockheaders from unanimously agreed Hashi oracle blockheaders (when Hashi is live)
   - a frontend that queries RPCs for proofs for a storage slot related to your ownership of a specific NFT (Pudgy Penguins in this case) and generates merkle proofs to verify that you hold this NFT
   - verification of this proof to mint an NFT
 
-- A GPT-3.5 enabled NFT project that extends [LangChain](https://github.com/hwchase17/langchain). It...
+- A GPT-3.5 enabled NFT project that extends [LangChain](https://github.com/hwchase17/langchain). 🤖 It...
   - Mints a derivative on a new chain upon verification of a merkle proof of ETHL1 ownership of a Based Ghoul
   - Mints the derivative with the same metadata and replicated ipfs (same image) on the new chain
   - turns the NFT in a custom chat agent using LangChain
   - Gives the user the ability to chat with their NFT! 
 
-- A User intercace that 
-  - allows you to input your NFTid to mint a derivative on a destination chain
+- A User intercace that 🌸
+  - Verify NFT ownership so that only you have access to your NFT-AI-Companion!
   - allows you to converse with your NFT!
 
 Made by
