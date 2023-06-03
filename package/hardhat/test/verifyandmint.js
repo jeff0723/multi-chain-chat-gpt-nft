@@ -8,8 +8,11 @@ import {
   ghoulsSlotOf,
   CURRENTBLOCKHEIGHT,
   GHOULTOKENID,
+  CHATGPTNFT_ABI,
 } from "./constant.js";
 dotenv.config({ path: "../.env" });
+
+const CHATGPTNFT_ADDRESS = "0x83fe1B2DF040De3FC019545CCf54751e97e15792";
 
 const mainnetRPC =
   "https://mainnet.infura.io/v3/dc7c60b22021400a97355601e710833d";
@@ -80,6 +83,27 @@ async function testContract() {
   } catch (err) {
     console.log("Error: ", err.message);
   }
+
+  const chatgpt_nft = new ethers.Contract(
+    CHATGPTNFT_ADDRESS,
+    CHATGPTNFT_ABI,
+    gnosisSigner
+  );
+
+  const mint = await chatgpt_nft.mint(
+    "0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7",
+    GHOULTOKENID,
+    blockheader,
+    signature,
+    proof.storageHash,
+    proof.accountProof,
+    proof.storageProof[0].proof,
+    {
+      gasLimit: 2e7,
+      gasPrice: 30000000000,
+    }
+  );
+  console.log(mint);
 }
 
 testContract();

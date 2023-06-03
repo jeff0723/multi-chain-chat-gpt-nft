@@ -381,11 +381,6 @@ export const CHATGPTNFT_ABI = [
       },
       {
         internalType: "bytes32",
-        name: "stateRoot",
-        type: "bytes32",
-      },
-      {
-        internalType: "bytes32",
         name: "storageRoot",
         type: "bytes32",
       },
