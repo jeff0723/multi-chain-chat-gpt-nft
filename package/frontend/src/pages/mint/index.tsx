@@ -79,7 +79,21 @@ function MintPage({ }: Props) {
             proof.storageHash,
             proof.accountProof,
             proof.storageProof[0].proof,])
-        write({
+        // write({
+        //     args: [
+        //         walletClient?.account.address,
+        //         1340,
+        //         blockheader,
+        //         currentSignature,
+        //         proof.storageHash,
+        //         proof.accountProof,
+        //         proof.storageProof[0].proof,],
+        // })
+
+        await walletClient.writeContract({
+            address: CHATGPT_NFT_ADDRESS,
+            abi: CHATGPT_NFT_ABI,
+            functionName: 'mint',
             args: [
                 walletClient?.account.address,
                 1340,
@@ -87,9 +101,14 @@ function MintPage({ }: Props) {
                 currentSignature,
                 proof.storageHash,
                 proof.accountProof,
-                proof.storageProof[0].proof,],
+                proof.storageProof[0].proof]
         })
-
+        // await walletClient.writeContract({
+        //     address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+        //     abi: wagmiAbi,
+        //     functionName: 'mint',
+        //     account,
+        // })
         // const contract = getContract({
         //     address: CHATGPT_NFT_ADDRESS,
         //     abi: CHATGPT_NFT_ABI,
