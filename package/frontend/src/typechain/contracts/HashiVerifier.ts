@@ -30,7 +30,7 @@ export interface HashiVerifierInterface extends utils.Interface {
   functions: {
     "getBlockHeader()": FunctionFragment;
     "hashiheader()": FunctionFragment;
-    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes32,bytes[],bytes[])": FunctionFragment;
+    "verifyOwner(bytes32,uint256,uint256,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
   };
 
   getFunction(
@@ -50,7 +50,7 @@ export interface HashiVerifierInterface extends utils.Interface {
     values: [
       BytesLike,
       BigNumberish,
-      BytesLike,
+      BigNumberish,
       BytesLike,
       BytesLike,
       BytesLike[],
@@ -132,9 +132,9 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
+      positionVariable: BigNumberish,
       signature: BytesLike,
       stateRoot: BytesLike,
-      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }
@@ -148,9 +148,9 @@ export interface HashiVerifier extends BaseContract {
   verifyOwner(
     blockheader: BytesLike,
     tokenId: BigNumberish,
+    positionVariable: BigNumberish,
     signature: BytesLike,
     stateRoot: BytesLike,
-    storageRoot: BytesLike,
     stateProof: BytesLike[],
     storageProof: BytesLike[],
     overrides?: Overrides & { from?: string }
@@ -164,9 +164,9 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
+      positionVariable: BigNumberish,
       signature: BytesLike,
       stateRoot: BytesLike,
-      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: CallOverrides
@@ -189,9 +189,9 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
+      positionVariable: BigNumberish,
       signature: BytesLike,
       stateRoot: BytesLike,
-      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }
@@ -206,9 +206,9 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
+      positionVariable: BigNumberish,
       signature: BytesLike,
       stateRoot: BytesLike,
-      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }
