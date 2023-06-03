@@ -3,7 +3,7 @@ pragma solidity >=0.8.0;
 
 import {MPT} from "./MPT.sol";
 import {StorageVerifier} from "./StorageVerifier.sol";
-import "./interfaces/";
+import {IHashi} from "./interfaces/IHashi.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract claimPenguin is StorageVerifier {
@@ -20,20 +20,23 @@ contract claimPenguin is StorageVerifier {
     constructor(address hashiaddress) {
         Hashi = IHashi(hashiaddress);
     }
-    
+
     /// @notice Explain to an end user what this does
     /// @dev Explain to a developer any extra details
     /// @param Documents a parameter just like in doxygen (must be followed by parameter name)
     /// @return Documents the return variables of a contract’s function state variable
     function getBlockHeader() {
-        blockheader = Hashi.getHash(uint256 domain,
-        uint256 id,
-        IOracleAdapter[] memory oracleAdapters)
+        // blockheader = Hashi.getHash(uint256 domain,
+        // uint256 id,
+        // IOracleAdapter[] memory oracleAdapters)
 
-        return blockheader;
-    } 
+        // return blockheader;
 
-    /// @notice Upon proving that owner owns 
+        return
+            "0x46ef9d82ce11c07fd77ff6db917ebb25f17f0b6819a7d702d9079ceb2f9ef8ea";
+    }
+
+    /// @notice Upon proving that owner owns
     /// @dev Explain to a developer any extra details
     /// @param Documents a parameter just like in doxygen (must be followed by parameter name)
     /// @return Documents the return variables of a contract’s function state variable
@@ -42,18 +45,17 @@ contract claimPenguin is StorageVerifier {
         uint256 tokenId,
         string memory image,
         bytes memory signature,
-        bytes32 stateRoot, 
+        bytes32 stateRoot,
         bytes32 storageRoot,
         bytes[] memory stateProof,
         bytes[] memory storageProof
     ) public {
-
         // verify that the blockheader inputted is the current stored hashi header
-        if(hashiheader != blockheader) {
+        if (hashiheader != blockheader) {
             revert InvalidHashiHash();
         }
 
-        // recover owner for storage slot access 
+        // recover owner for storage slot access
         bytes32 message = abi.encode(_msgSender()).toEthSignedMessageHash();
         address owner = message.recover(signature);
 
@@ -78,6 +80,12 @@ contract claimPenguin is StorageVerifier {
         });
 
         // Then verify the proof
-        _verifyStorage(stateRoot, pudgyPenguins, slot, stateProof, storageProof);
+        _verifyStorage(
+            stateRoot,
+            pudgyPenguins,
+            slot,
+            stateProof,
+            storageProof
+        );
     }
 }

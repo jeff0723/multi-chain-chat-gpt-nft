@@ -16,11 +16,6 @@ const config: HardhatUserConfig = {
       },
       chainId: 1337,
     },
-    rinkeby: {
-      url: process.env.RINKEBY_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      chainId: 4,
     },
     mainnet: {
       url: process.env.MAINNET_URL || "",
