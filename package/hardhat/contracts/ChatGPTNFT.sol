@@ -7,8 +7,9 @@ import "./HashiVerifier.sol";
 
 interface IHashiVerifier {
     function verifyOwner(
-        bytes32 hashiheader,
+        bytes32 blockheader,
         uint256 tokenId,
+        address messageSender,
         bytes memory signature,
         bytes32 storageRoot,
         bytes[] memory stateProof,
@@ -48,6 +49,7 @@ contract ChatGPTNFT is ERC721 {
         hashiVerifier.verifyOwner(
             blockheader,
             tokenId,
+            msg.sender,
             signature,
             storageRoot,
             stateProof,

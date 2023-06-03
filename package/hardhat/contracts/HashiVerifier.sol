@@ -33,6 +33,7 @@ contract HashiVerifier is StorageVerifier {
     function verifyOwner(
         bytes32 blockheader,
         uint256 tokenId,
+        address messageSender,
         bytes memory signature,
         bytes32 storageRoot,
         bytes[] memory stateProof,
@@ -43,7 +44,7 @@ contract HashiVerifier is StorageVerifier {
 
         require(blockheader == hashiheader, "blockheader is incorrect");
         // recover owner for storage slot access
-        bytes32 message = abi.encode(msg.sender).toEthSignedMessageHash();
+        bytes32 message = abi.encode(messageSender).toEthSignedMessageHash();
         address owner = message.recover(signature);
 
         // Since this contract is not deployed on a network that settles on mainnet,

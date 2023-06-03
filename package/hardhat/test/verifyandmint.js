@@ -66,6 +66,7 @@ async function testContract() {
   // console.log(proof.accountProof, proof.storageProof[0], stateRoot, proof);
 
   try {
+
     const verifyOwnertx = await hashiVerifier.verifyOwner(
       blockheader,
       GHOULTOKENID,
