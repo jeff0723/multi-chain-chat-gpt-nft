@@ -13,12 +13,12 @@ contract claimPenguin is StorageVerifier {
     error InvalidHashiHash();
 
     bytes32 blockheader;
-    IHashi public hashiInterface;
+    IHashi private immutable hashiInterface;
 
     // use hashi to get the current stateroot and return the blockNumber
 
     constructor(address hashiaddress) {
-        Hashi = IHashi(hashiaddress);
+        hashi = IHashi(hashiaddress);
     }
 
     /// @notice Explain to an end user what this does
