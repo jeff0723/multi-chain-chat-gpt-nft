@@ -33,21 +33,15 @@ const config: HardhatUserConfig = {
       },
       chainId: 1337,
     },
-<<<<<<< HEAD
     gnosis: {
       allowUnlimitedContractSize: true,
       url: process.env.GNOSISRPCURL || "",
       accounts: [process.env.GNOSISPK || ""],
       chainId: 100,
     },
-    aurora: {
-      url: process.env.AURORA_MAINNET_RPC || "",
-      accounts: [process.env.GNOSISPK || ""],
-      chainId: 1313161554, 
-    }, 
     auroratestnet: {
       allowUnlimitedContractSize: true,
-      url: process.env.AURORA_TESTNET_RPC || "",
+      url: process.env.AURORARPC || "",
       accounts: [process.env.GNOSISPK || ""],
       chainId: 1313161555,
     },
@@ -57,26 +51,6 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
       chainId: 1,
     },
-=======
-    // gnosis: {
-    //   allowUnlimitedContractSize: true,
-    //   url: process.env.GNOSISRPCURL || "",
-    //   accounts: [process.env.GNOSISPK || ""],
-    //   chainId: 100,
-    // },
-    // auroratestnet: {
-    //   allowUnlimitedContractSize: true,
-    //   url: process.env.AURORARPC || "",
-    //   accounts: [process.env.GNOSISPK || ""],
-    //   chainId: 1313161555,
-    // },
-    // mainnet: {
-    //   url: process.env.MAINNET_URL || "",
-    //   accounts:
-    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    //   chainId: 1,
-    // },
->>>>>>> eedc1d9672f03795ea700b474bd2cc99504700ab
   },
   namedAccounts: {
     deployer: {
