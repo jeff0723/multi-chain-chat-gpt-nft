@@ -120,7 +120,7 @@ export const HASHI_VERIFIER_ABI = [
 ];
 
 export const HASHI_VERIFIER_ADDRESS =
-  "0x15AB4Bc65D5293ad5d81cc572ed0716ede3D6692";
+  "0xd7eFBF9B92C98A189f216995FEAb45c537BD7E25";
 
 export const ghoulsSlotOf = (tokenId) =>
   ethers.utils.keccak256(

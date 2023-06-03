@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BaseContract, Signer, utils } from "ethers";
-import type { EventFragment } from "@ethersproject/abi";
+
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -14,32 +14,8 @@ import type {
 export interface StorageVerifierInterface extends utils.Interface {
   functions: {};
 
-  events: {
-    "accountproofcomplete()": EventFragment;
-    "storageproofcomplete()": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "accountproofcomplete"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "storageproofcomplete"): EventFragment;
+  events: {};
 }
-
-export interface accountproofcompleteEventObject {}
-export type accountproofcompleteEvent = TypedEvent<
-  [],
-  accountproofcompleteEventObject
->;
-
-export type accountproofcompleteEventFilter =
-  TypedEventFilter<accountproofcompleteEvent>;
-
-export interface storageproofcompleteEventObject {}
-export type storageproofcompleteEvent = TypedEvent<
-  [],
-  storageproofcompleteEventObject
->;
-
-export type storageproofcompleteEventFilter =
-  TypedEventFilter<storageproofcompleteEvent>;
 
 export interface StorageVerifier extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -71,13 +47,7 @@ export interface StorageVerifier extends BaseContract {
 
   callStatic: {};
 
-  filters: {
-    "accountproofcomplete()"(): accountproofcompleteEventFilter;
-    accountproofcomplete(): accountproofcompleteEventFilter;
-
-    "storageproofcomplete()"(): storageproofcompleteEventFilter;
-    storageproofcomplete(): storageproofcompleteEventFilter;
-  };
+  filters: {};
 
   estimateGas: {};
 

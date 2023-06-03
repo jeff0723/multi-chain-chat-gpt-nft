@@ -13,11 +13,7 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type {
-  FunctionFragment,
-  Result,
-  EventFragment,
-} from "@ethersproject/abi";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -30,7 +26,7 @@ export interface HashiVerifierInterface extends utils.Interface {
   functions: {
     "getBlockHeader()": FunctionFragment;
     "hashiheader()": FunctionFragment;
-    "verifyOwner(bytes32,uint256,uint256,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
+    "verifyOwner(bytes32,uint256,bytes,bytes32,bytes[],bytes[])": FunctionFragment;
   };
 
   getFunction(
@@ -49,7 +45,6 @@ export interface HashiVerifierInterface extends utils.Interface {
     functionFragment: "verifyOwner",
     values: [
       BytesLike,
-      BigNumberish,
       BigNumberish,
       BytesLike,
       BytesLike,
@@ -71,32 +66,8 @@ export interface HashiVerifierInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {
-    "accountproofcomplete()": EventFragment;
-    "storageproofcomplete()": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "accountproofcomplete"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "storageproofcomplete"): EventFragment;
+  events: {};
 }
-
-export interface accountproofcompleteEventObject {}
-export type accountproofcompleteEvent = TypedEvent<
-  [],
-  accountproofcompleteEventObject
->;
-
-export type accountproofcompleteEventFilter =
-  TypedEventFilter<accountproofcompleteEvent>;
-
-export interface storageproofcompleteEventObject {}
-export type storageproofcompleteEvent = TypedEvent<
-  [],
-  storageproofcompleteEventObject
->;
-
-export type storageproofcompleteEventFilter =
-  TypedEventFilter<storageproofcompleteEvent>;
 
 export interface HashiVerifier extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -132,9 +103,8 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
-      positionVariable: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
+      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }
@@ -148,9 +118,8 @@ export interface HashiVerifier extends BaseContract {
   verifyOwner(
     blockheader: BytesLike,
     tokenId: BigNumberish,
-    positionVariable: BigNumberish,
     signature: BytesLike,
-    stateRoot: BytesLike,
+    storageRoot: BytesLike,
     stateProof: BytesLike[],
     storageProof: BytesLike[],
     overrides?: Overrides & { from?: string }
@@ -164,22 +133,15 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
-      positionVariable: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
+      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
-  filters: {
-    "accountproofcomplete()"(): accountproofcompleteEventFilter;
-    accountproofcomplete(): accountproofcompleteEventFilter;
-
-    "storageproofcomplete()"(): storageproofcompleteEventFilter;
-    storageproofcomplete(): storageproofcompleteEventFilter;
-  };
+  filters: {};
 
   estimateGas: {
     getBlockHeader(overrides?: CallOverrides): Promise<BigNumber>;
@@ -189,9 +151,8 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
-      positionVariable: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
+      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }
@@ -206,9 +167,8 @@ export interface HashiVerifier extends BaseContract {
     verifyOwner(
       blockheader: BytesLike,
       tokenId: BigNumberish,
-      positionVariable: BigNumberish,
       signature: BytesLike,
-      stateRoot: BytesLike,
+      storageRoot: BytesLike,
       stateProof: BytesLike[],
       storageProof: BytesLike[],
       overrides?: Overrides & { from?: string }

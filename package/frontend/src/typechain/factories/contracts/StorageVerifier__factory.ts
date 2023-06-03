@@ -31,18 +31,6 @@ const _abi = [
     name: "InvalidStorageProof",
     type: "error",
   },
-  {
-    anonymous: false,
-    inputs: [],
-    name: "accountproofcomplete",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [],
-    name: "storageproofcomplete",
-    type: "event",
-  },
 ] as const;
 
 export class StorageVerifier__factory {
