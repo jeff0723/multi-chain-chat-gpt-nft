@@ -35,10 +35,6 @@ contract ChatGPTNFT is ERC721 {
         hashiVerifier = IHashiVerifier(_hashiVerifier);
     }
 
-    function isOriginalOwner() public returns (bool) {
-        return true;
-    }
-
     //update function input
     function mint(
         address _to,
@@ -64,7 +60,7 @@ contract ChatGPTNFT is ERC721 {
     }
 
     function setAgentURI(uint256 _tokenId, string memory _uri) public {
-        require(isOriginalOwner(), "Not original owner");
+        require(msg.sender == ownerOf(_tokenId), "Not the owner of the token");
         agentURI[_tokenId] = _uri;
     }
 
