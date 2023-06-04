@@ -39,6 +39,12 @@ const config: HardhatUserConfig = {
       accounts: [process.env.GNOSISPK || ""],
       chainId: 100,
     },
+    aurora: {
+      allowUnlimitedContractSize: true,
+      url: process.env.AURORA_MAINNET_RPC || "",
+      accounts: [process.env.GNOSISPK || ""],
+      chainId: 1313161554,
+    },
     auroratestnet: {
       allowUnlimitedContractSize: true,
       url: process.env.AURORARPC || "",

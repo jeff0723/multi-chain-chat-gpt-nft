@@ -18,7 +18,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
 	console.log(hashverifier.address)
 
-	const constructorargsNFT = [ghoulsAddress, "", hashverifier.address]
+	const constructorargsNFT = [ghoulsAddress, "", "0x4C0b2D94Eaf9A63EECaCeFba2B2e89E047657d14"]
 
 	const chatGPTNFT = await deploy('ChatGPTNFT', {
 		from: deployer,
