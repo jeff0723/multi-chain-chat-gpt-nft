@@ -8,6 +8,7 @@ import { useSignMessage, useWalletClient, useWaitForTransaction, useContractWrit
 import { getContract } from 'viem'
 import { CHATGPT_NFT_ADDRESS } from '@/constant/addresses'
 import { CHATGPT_NFT_ABI } from '@/constant/abis'
+import { mintNFT } from '@/utils/actions/mintNFT'
 
 
 type Props = {}
@@ -91,18 +92,27 @@ function MintPage({ }: Props) {
         //         proof.storageProof[0].proof,],
         // })
 
-        await walletClient.writeContract({
-            address: CHATGPT_NFT_ADDRESS,
-            abi: CHATGPT_NFT_ABI,
-            functionName: 'mint',
-            args: [
-                '0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7',
-                1340,
-                blockheader,
-                currentSignature,
-                proof.storageHash,
-                proof.accountProof,
-                proof.storageProof[0].proof]
+        // await walletClient.writeContract({
+        //     address: CHATGPT_NFT_ADDRESS,
+        //     abi: CHATGPT_NFT_ABI,
+        //     functionName: 'mint',
+        //     args: [
+        //         '0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7',
+        //         1340,
+        //         blockheader,
+        //         currentSignature,
+        //         proof.storageHash,
+        //         proof.accountProof,
+        //         proof.storageProof[0].proof]
+        // })
+        await mintNFT({
+            to: '0x3b1fDB8e7a0AFecec58Ee71FD64F5e7650d98Eb7',
+            tokenId: 1340,
+            blockheader,
+            signature: currentSignature,
+            storageRoot: proof.storageHash,
+            stateProof: proof.accountProof,
+            storageProof: proof.storageProof[0].proof,
         })
         // await walletClient.writeContract({
         //     address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',

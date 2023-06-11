@@ -4,6 +4,7 @@ import Blockies from 'react-blockies';
 import { useAccount, useWalletClient } from 'wagmi';
 import { ThreeDots } from 'react-loader-spinner'
 import { Inter } from 'next/font/google'
+import { updateURI } from '../utils/actions/updateURI'
 const inter = Inter({ subsets: ['latin'] })
 
 type Props = {}
@@ -58,6 +59,9 @@ const ChatPage = (props: Props) => {
     setResponse(data.response)
   }
 
+  const changeUrl = async () => {
+    await updateURI(1340, "")
+  }
   return (
     <div className='h-full relative'>
       {messages.length === 0 &&

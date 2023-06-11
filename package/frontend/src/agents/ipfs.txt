@@ -1,5 +1,5 @@
 Bridge Expert : https://ipfs.io/ipfs/bafkreicvk3pbfx4oidwcpm6pr254leu4uggxndb3gmonqfw22sbe2e72ei
-Aurora Expert : https://ipfs.io/ipfs/bafkreigqc6zcot6ewexeuwcnzbwyulu3yeet2ja77w23wihxpdueqhqnwa
-NFT Trader: https://ipfs.io/ipfs/bafkreidpnddxjfxjuevyfw2hyhvf4r4xtyumpxp2qkp3imszldzxytx5ry
+Aurora Expert : https://ipfs.io/ipfs/bafkreigqc6zcot6ewexeuwcnzbwyulu3yeet2ja77w23wihxpdueqhqnwa ask what is Aurora?
+NFT Trader: https://ipfs.io/ipfs/bafkreidpnddxjfxjuevyfw2hyhvf4r4xtyumpxp2qkp3imszldzxytx5ry 
 IPFS Expert: https://ipfs.io/ipfs/bafkreia7mdozwflqofa3kjnggukjhv7drgfb6wyrlpesxppgwyv5n543oe ask what is CID?
 NEAR Expert: https://ipfs.io/ipfs/bafkreif47klnklc4brlw7tzyw6ouc7zqpgcd437pmhimqyc2e2ug7hm5cm ask what is BOS(Blockchain operating system)?
