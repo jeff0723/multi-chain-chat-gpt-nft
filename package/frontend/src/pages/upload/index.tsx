@@ -30,6 +30,12 @@ const UploadAgentPage = (props: Props) => {
         return true
     }
     const upload = async () => {
+        setAgentUriInput({
+            name: "",
+            description: "",
+            personality: "",
+            example: ""
+        })
         setIsURIUploading(true)
         const cid = await storeAgentURI(
             {
