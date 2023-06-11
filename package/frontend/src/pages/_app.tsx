@@ -20,7 +20,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, aurora, gnosis } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import ApplicationUpdater from '@/state/updater';
-
+import { Toaster } from "react-hot-toast";
 
 const { chains, publicClient } = configureChains(
   [gnosis, aurora, mainnet, polygon, optimism, arbitrum],
@@ -58,6 +58,27 @@ const wagmiConfig = createConfig({
   connectors,
   publicClient
 })
+const toastOptions = {
+  style: {
+    background: "rgba(0, 0, 0)",
+    color: "#ffffff",
+  },
+  success: {
+    className: "border border-green-500",
+    iconTheme: {
+      primary: "#10B981",
+      secondary: "white",
+    },
+  },
+  error: {
+    className: "border border-red-500",
+    iconTheme: {
+      primary: "#EF4444",
+      secondary: "white",
+    },
+  },
+  loading: { className: "border border-yello-300" },
+};
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
@@ -66,6 +87,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <RainbowKitProvider theme={darkTheme()} chains={chains} appInfo={demoAppInfo}>
           <ApplicationUpdater />
           <Layout>
+            <Toaster position="top-right" toastOptions={toastOptions} />
+
             <Component {...pageProps} />
           </Layout>
         </RainbowKitProvider>

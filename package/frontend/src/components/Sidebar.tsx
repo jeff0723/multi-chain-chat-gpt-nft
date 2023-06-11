@@ -11,6 +11,7 @@ enum Tab {
     Mint,
     Chat,
     Settings,
+    Upload
 }
 
 const currentTab = (path: string): Tab => {
@@ -18,6 +19,7 @@ const currentTab = (path: string): Tab => {
         case '/chat': return Tab.Chat
         case '/mint': return Tab.Mint
         case '/settings': return Tab.Settings
+        case '/upload': return Tab.Upload
         default:
             return Tab.Chat
     }
@@ -91,6 +93,17 @@ function Sidebar({ }: Props) {
                         <Text isSelectedTab={Tab.Mint == selectedTab}>
 
                             Mint
+                        </Text>
+                    </div>
+                </Link>
+                <Link href='/upload' onClick={() => {
+                    setSelectedTab(Tab.Upload)
+                }}>
+                    <div className='rounded-md hover:bg-white hover:bg-opacity-10'
+                    >
+                        <Text isSelectedTab={Tab.Upload == selectedTab}>
+
+                            Upload
                         </Text>
                     </div>
                 </Link>
